@@ -49,37 +49,38 @@
 								<h2 class="major">My Projects</h2>
 								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
 								<p>Here are some of my coursework projects. I mainly write in Python.</p>
-
+								<hr />
 								<!-- Project 1 -->
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Tutor Optimization and Scheduling using ILP</h3>
 									<p>It minimizes the number of tutor needed in cram school when recruiting tutors, and make a learning schedule for classes based on the minimum number of tutors, using Integer Linear Programming. Here's a snippet.</p>
 									<pre><code>
-		m = mip.Model("Optimimsasi Penjadwalan Bimbel")
+m = mip.Model("Optimimsasi Penjadwalan Bimbel")
 
-		######################### VARIABLES #########################
+######################### VARIABLES #########################
 
-		g = [m.add_var(var_type=mip.INTEGER) for p in range(np)] # banyak guru
-		t = [[m.add_var(var_type=mip.INTEGER) for h in range(nh)] for p in range(np)] # banyaknya transfer
+g = [m.add_var(var_type=mip.INTEGER) for p in range(np)] # banyak guru
+t = [[m.add_var(var_type=mip.INTEGER) for h in range(nh)] for p in range(np)] # banyaknya transfer
 
-		x = []
-		y = []
+x = []
+y = []
 
-		for c in range(nc):
+for c in range(nc):
 
-			# slot jadwal
-			x.append([[[[m.add_var(var_type=mip.BINARY) for s in range(ns)] for h in range(nh)] for p in range(np)] for k in range(nk[c])])
+	# slot jadwal
+	x.append([[[[m.add_var(var_type=mip.BINARY) for s in range(ns)] for h in range(nh)] for p in range(np)] for k in range(nk[c])])
 
-			# variabel yg memutuskan bahwa kelompok k masuk hari h
-			y.append([[m.add_var(var_type=mip.BINARY) for h in range(nh)] for k in range(nk[c])])
+	# variabel yg memutuskan bahwa kelompok k masuk hari h
+	y.append([[m.add_var(var_type=mip.BINARY) for h in range(nh)] for k in range(nk[c])])
 
-		######################### OBJECTIVE FUNCTION #########################
+######################### OBJECTIVE FUNCTION #########################
 
-		m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(t[p][h] for p in range(np) for h in range(nh)))
+m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(t[p][h] for p in range(np) for h in range(nh)))
 									</code></pre>
 									<a href="https://github.com/soniaagst/ilp-tutor-number-optimization-and-scheduling" target="_blank" class="button small">View on GitHub</a>
 								</section>
+								<hr />
 
 								<!-- Project 2 -->
 								<section>
@@ -88,6 +89,7 @@
 									<p>It encrypts and do cryptanalysis to a given Sundanese text utilizing Vigenere cipher.</p>
 									<a href="https://github.com/soniaagst/vigenere-cipher-encryption-and-cryptanalysis" target="_blank" class="button small">View on GitHub</a>
 								</section>
+								<hr />
 
 								<!-- Project 3 -->
 								<section>
@@ -96,6 +98,7 @@
 									<p>It solves unconstrained nonlinear optimization problems and provides several tools or methods to do so.</p>
 									<a href="https://github.com/soniaagst/unconstrained-nonlinear-programming" target="_blank" class="button small">View on GitHub</a>
 								</section>
+								<hr />
 
 								<!-- Project 4 -->
 								<section>
@@ -104,6 +107,7 @@
 									<p>It decodes code in fininte field using the code's syndrome. To avoid confusion, the 'code' here is the encoding-decoding-related code (in which it's numbers in this project), not the coding code.</p>
 									<a href="https://github.com/soniaagst/coding-theory/tree/main/syndrome-decoding" target="_blank" class="button small">View on GitHub</a>
 								</section>
+								<hr />
 
 								<!-- Project 5 -->
 								<section>
@@ -112,6 +116,7 @@
 									<p>It generates different types of nonlinear code, such as Preparata code and Nordstrom-Robinson code.</p>
 									<a href="https://github.com/soniaagst/coding-theory/blob/main/nonlinear-codes.ipynb" target="_blank" class="button small">View on GitHub</a>
 								</section>
+								<hr />
 
 								<p>By the way, check out my <a href="#gallery">awesome artwork</a>.</p>
 							</article>
@@ -119,7 +124,7 @@
 						<!-- Gallery -->
 							<article id="gallery">
 								<h2 class="major">Gallery</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
 								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
 								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
 							</article>
@@ -127,8 +132,13 @@
 						<!-- Haiku -->
 							<article id="haiku">
 								<h2 class="major">Haiku Corner</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
+								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+								<p>Lorem ipsum dolor sit amet.</p>
+								<blockquote>
+									一歩 しか<br />
+									動けず 負たん
+									王様 だ
+								</blockquote>
 							</article>
 
 						<!-- Contact -->
