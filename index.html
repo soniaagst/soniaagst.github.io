@@ -56,30 +56,31 @@
 									<h3>Tutor Optimization and Scheduling using ILP</h3>
 									<p>It minimizes the number of tutor needed in cram school when recruiting tutors, and make a learning schedule for classes based on the minimum number of tutors, using Integer Linear Programming. Here's a snippet.</p>
 									<pre><code>
-										m = mip.Model("Optimimsasi Penjadwalan Bimbel")
+		m = mip.Model("Optimimsasi Penjadwalan Bimbel")
 
-										######################### VARIABLES #########################
-										
-										g = [m.add_var(var_type=mip.INTEGER) for p in range(np)] # banyak guru
-										t = [[m.add_var(var_type=mip.INTEGER) for h in range(nh)] for p in range(np)] # banyaknya transfer
-										
-										x = []
-										y = []
-										
-										for c in range(nc):
-										
-											# slot jadwal
-											x.append([[[[m.add_var(var_type=mip.BINARY) for s in range(ns)] for h in range(nh)] for p in range(np)] for k in range(nk[c])])
-										
-											# variabel yg memutuskan bahwa kelompok k masuk hari h
-											y.append([[m.add_var(var_type=mip.BINARY) for h in range(nh)] for k in range(nk[c])])
-										
-										######################### OBJECTIVE FUNCTION #########################
-										
-										m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(t[p][h] for p in range(np) for h in range(nh)))
+		######################### VARIABLES #########################
+
+		g = [m.add_var(var_type=mip.INTEGER) for p in range(np)] # banyak guru
+		t = [[m.add_var(var_type=mip.INTEGER) for h in range(nh)] for p in range(np)] # banyaknya transfer
+
+		x = []
+		y = []
+
+		for c in range(nc):
+
+			# slot jadwal
+			x.append([[[[m.add_var(var_type=mip.BINARY) for s in range(ns)] for h in range(nh)] for p in range(np)] for k in range(nk[c])])
+
+			# variabel yg memutuskan bahwa kelompok k masuk hari h
+			y.append([[m.add_var(var_type=mip.BINARY) for h in range(nh)] for k in range(nk[c])])
+
+		######################### OBJECTIVE FUNCTION #########################
+
+		m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(t[p][h] for p in range(np) for h in range(nh)))
 									</code></pre>
 									<a href="https://github.com/soniaagst/ilp-tutor-number-optimization-and-scheduling" target="_blank" class="button small">View on GitHub</a>
 								</section>
+
 								<!-- Project 2 -->
 								<section>
 									<i class="icon solid fa-code"></i>
@@ -87,6 +88,7 @@
 									<p>It encrypts and do cryptanalysis to a given Sundanese text utilizing Vigenere cipher.</p>
 									<a href="https://github.com/soniaagst/vigenere-cipher-encryption-and-cryptanalysis" target="_blank" class="button small">View on GitHub</a>
 								</section>
+
 								<!-- Project 3 -->
 								<section>
 									<i class="icon solid fa-code"></i>
@@ -94,6 +96,7 @@
 									<p>It solves unconstrained nonlinear optimization problems and provides several tools or methods to do so.</p>
 									<a href="https://github.com/soniaagst/unconstrained-nonlinear-programming" target="_blank" class="button small">View on GitHub</a>
 								</section>
+
 								<!-- Project 4 -->
 								<section>
 									<i class="icon solid fa-code"></i>
@@ -101,6 +104,7 @@
 									<p>It decodes code in fininte field using the code's syndrome. To avoid confusion, the 'code' here is the encoding-decoding-related code (in which it's numbers in this project), not the coding code.</p>
 									<a href="https://github.com/soniaagst/coding-theory/tree/main/syndrome-decoding" target="_blank" class="button small">View on GitHub</a>
 								</section>
+
 								<!-- Project 5 -->
 								<section>
 									<i class="icon solid fa-code"></i>
@@ -131,7 +135,7 @@
 							<article id="contact">
 								<h2 class="major">Contact Me</h2>
 								<p>Feel free to send me a message — no need to leave your name!</p>
-								<form action="https://formspree.io/f/xrbboydr" method="post">
+								<form action="https://formspree.io/f/xrbboydr" method="post" id="contact-form">
 									<div class="fields">
 										<div class="field half">
 											<label for="name">Name</label>
@@ -139,7 +143,7 @@
 										</div>
 										<div class="field half">
 											<label for="email">Email</label>
-											<input type="text" name="email" id="email" placeholder="janedoe@example.com" />
+											<input type="text" name="email" id="email" placeholder="janedoe@example.com" required />
 										</div>
 										<div class="field">
 											<label for="message">Message</label>
@@ -420,6 +424,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				document.getElementById("contact-form").addEventListener("submit", function (event) {
+					const message = document.querySelector('textarea[name="message"]').value;
+			
+					if (!message.trim()) {
+						event.preventDefault(); // Stop form submission
+						alert("Please fill in the message field!"); // Show an error message
+					}
+				});
+			</script>
 
 	</body>
 </html>
