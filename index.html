@@ -24,7 +24,7 @@
 						</div>
 						<div class="content">
 							<div class="inner">
-								<h1>Hi, I'm <em>Sonia</em></h1>
+								<h1>Hi, I'm <b>Sonia</b></h1>
 								<p>your new friend from Indonesia.<br />
 								I sketch, write codes <b>AND</b>, of course, haiku.<br />
 								Follow me this way, let me show you my legacy.</p>
@@ -34,9 +34,9 @@
 							<ul>
 								<li><a href="#projects">Projects</a></li>
 								<li><a href="#gallery">Gallery</a></li>
-								<li><a href="#haiku">Haiku Corner</a></li>
+								<li><a href="#haiku">Haiku</a></li>
 								<li><a href="#contact">Contact</a></li>
-								<li><a href="#elements">Elements</a></li>
+								<!-- <li><a href="#elements">Elements</a></li> -->
 							</ul>
 						</nav>
 					</header>
@@ -44,41 +44,70 @@
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Projects  class="main special"-->
+						<!-- Projects -->
 							<article id="projects">
 								<h2 class="major">My Projects</h2>
 								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-								<p>Check out some of my coursework projects showcasing my coding skills.</p>
+								<p>Here are some of my coursework projects. I mainly write in Python.</p>
 
 								<!-- Project 1 -->
+								<section>
 									<i class="icon solid fa-code"></i>
-									<h3>Tutor Number Optimization and Scheduling using ILP</h3>
-									<p>A brief description of what the project does or solves.</p>
-									<a href="https://github.com/soniaagst/ilp-tutor-number-optimization-and-scheduling" target="_blank" class="button small">View on GitHub</a>
+									<h3>Tutor Optimization and Scheduling using ILP</h3>
+									<p>It minimizes the number of tutor needed in cram school when recruiting tutors, and make a learning schedule for classes based on the minimum number of tutors, using Integer Linear Programming. Here's a snippet.</p>
+									<pre><code>
+										m = mip.Model("Optimimsasi Penjadwalan Bimbel")
 
+										######################### VARIABLES #########################
+										
+										g = [m.add_var(var_type=mip.INTEGER) for p in range(np)] # banyak guru
+										t = [[m.add_var(var_type=mip.INTEGER) for h in range(nh)] for p in range(np)] # banyaknya transfer
+										
+										x = []
+										y = []
+										
+										for c in range(nc):
+										
+											# slot jadwal
+											x.append([[[[m.add_var(var_type=mip.BINARY) for s in range(ns)] for h in range(nh)] for p in range(np)] for k in range(nk[c])])
+										
+											# variabel yg memutuskan bahwa kelompok k masuk hari h
+											y.append([[m.add_var(var_type=mip.BINARY) for h in range(nh)] for k in range(nk[c])])
+										
+										######################### OBJECTIVE FUNCTION #########################
+										
+										m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(t[p][h] for p in range(np) for h in range(nh)))
+									</code></pre>
+									<a href="https://github.com/soniaagst/ilp-tutor-number-optimization-and-scheduling" target="_blank" class="button small">View on GitHub</a>
+								</section>
 								<!-- Project 2 -->
+								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Vigenere Cipher: Encryption and Cryptanalysis</h3>
-									<p>A brief description of what the project does or solves.</p>
+									<p>It encrypts and do cryptanalysis to a given Sundanese text utilizing Vigenere cipher.</p>
 									<a href="https://github.com/soniaagst/vigenere-cipher-encryption-and-cryptanalysis" target="_blank" class="button small">View on GitHub</a>
-
+								</section>
 								<!-- Project 3 -->
+								<section>
 									<i class="icon solid fa-code"></i>
-									<h3>Optimization: Unconstrained Nonlinear Programming</h3>
-									<p>A brief description of what the project does or solves.</p>
+									<h3>Unconstrained Nonlinear Programming</h3>
+									<p>It solves unconstrained nonlinear optimization problems and provides several tools or methods to do so.</p>
 									<a href="https://github.com/soniaagst/unconstrained-nonlinear-programming" target="_blank" class="button small">View on GitHub</a>
-
+								</section>
 								<!-- Project 4 -->
+								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Syndrome Decoding</h3>
-									<p>A brief description of what the project does or solves.</p>
-									<a href="https://github.com/soniaagst/coding-theory" target="_blank" class="button small">View on GitHub</a>
-
+									<p>It decodes code in fininte field using the code's syndrome. To avoid confusion, the 'code' here is the encoding-decoding-related code (in which it's numbers in this project), not the coding code.</p>
+									<a href="https://github.com/soniaagst/coding-theory/tree/main/syndrome-decoding" target="_blank" class="button small">View on GitHub</a>
+								</section>
 								<!-- Project 5 -->
+								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Nonlinear Codes</h3>
-									<p>A brief description of what the project does or solves.</p>
-									<a href="https://github.com/soniaagst/coding-theory" target="_blank" class="button small">View on GitHub</a>
+									<p>It generates different types of nonlinear code, such as Preparata code and Nordstrom-Robinson code.</p>
+									<a href="https://github.com/soniaagst/coding-theory/blob/main/nonlinear-codes.ipynb" target="_blank" class="button small">View on GitHub</a>
+								</section>
 
 								<p>By the way, check out my <a href="#gallery">awesome artwork</a>.</p>
 							</article>
@@ -100,20 +129,21 @@
 
 						<!-- Contact -->
 							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
+								<h2 class="major">Contact Me</h2>
+								<p>Feel free to send me a message — no need to leave your name!</p>
+								<form action="https://formspree.io/f/xrbboydr" method="post">
 									<div class="fields">
 										<div class="field half">
 											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
+											<input type="text" name="name" id="name" placeholder="Jane Doe" />
 										</div>
 										<div class="field half">
 											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
+											<input type="text" name="email" id="email" placeholder="janedoe@example.com" />
 										</div>
 										<div class="field">
 											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
+											<textarea name="message" id="message" rows="4" placeholder="Hi, Sonia!" required></textarea>
 										</div>
 									</div>
 									<ul class="actions">
@@ -126,7 +156,7 @@
 									<li><a href="mailto:agst.sonia@gmail.com" target="_blank" class="icon fa-envelope"><span class="label">Email</span></a></li>
 									<li><a href="https://www.instagram.com/sonia_agst/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 									<li><a href="https://github.com/soniaagst" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="https://wa.me/6283845285336/" class="icon brands fa-whatsapp"><span target="_blank" class="label">WhatsApp</span></a></li>
+									<li><a href="https://wa.me/6283845285336/" target="_blank" class="icon brands fa-whatsapp"><span class="label">WhatsApp</span></a></li>
 								</ul>
 							</article>
 
@@ -376,7 +406,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 				<!-- Footer -->
 					<footer id="footer">
-						<p class="copyright">&copy; Sonia Augustin, 2025.</p>
+						<p class="copyright">&copy; Made with <i class="icon solid fa-code"></i> by Sonia Augustin, 2025.</p>
 					</footer>
 
 			</div>
