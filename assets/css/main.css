@@ -1728,3 +1728,56 @@ input, select, textarea {
 	.flipquote.flipped {
 		transform: rotateX(180deg);
 	}
+
+/* Gallery	 */
+	.gallery {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 15px; /* Space between images */
+	}
+	
+	.gallery img {
+		width: 100%; /* Make images responsive */
+		height: auto;
+		border-radius: 8px; /* Optional: Rounded corners */
+		transition: transform 0.3s, opacity 0.3s; /* Smooth hover effect */
+		box-shadow: 0 4px 6px rgba(214, 233, 247, 0.1); /* Soft shadow for each image */
+		cursor: pointer;
+	}
+	
+	.gallery img:hover {
+		transform: scale(1.05); /* Slight zoom on hover */
+		opacity: 0.8; /* Dim slightly */
+	}
+
+/* Modal Styling */
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Ensures the modal stays in the viewport */
+		z-index: 1000;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(27, 31, 34, 0.8); /* Semi-transparent background */
+		justify-content: center;
+		align-items: center;
+		transform: translate(-50%, -50%); /* Centers modal in the viewport */
+	}
+
+	.modal-content {
+		max-width: 90%;
+		max-height: 90%;
+		border-radius: 8px;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+	}
+
+	.close {
+		position: absolute;
+		top: 20px;
+		right: 30px;
+		color: white;
+		font-size: 30px;
+		font-weight: bold;
+		cursor: pointer;
+	}

@@ -591,7 +591,6 @@ document.getElementById("contact-form").addEventListener("submit", function (eve
 
   if (!message.trim()) {
     event.preventDefault(); // Stop form submission
-    alert("Please fill in the message field!"); // Show an error message
   }
 });
 
@@ -606,3 +605,28 @@ document.querySelectorAll('.flipquote').forEach(flipquote => {
     flipquote.classList.toggle('flipped');
   });
 });
+
+function openModal(imageSrc) {
+  const modal = document.getElementById('popup-modal');
+  const modalImg = document.getElementById('popup-image');
+
+  modal.style.display = 'flex'; // Show the modal
+  modalImg.src = imageSrc; // Set the image source
+
+	// Stop clicks on the image from closing the modal or affecting other elements
+	modalImg.addEventListener('click', (e) => {
+		e.stopPropagation();
+	});
+
+	// Allow clicking anywhere outside the image to close the modal
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+}
+
+function closeModal() {
+  const modal = document.getElementById('popup-modal');
+  modal.style.display = 'none'; // Hide the modal
+}

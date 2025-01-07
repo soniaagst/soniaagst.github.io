@@ -27,13 +27,13 @@
 								<h1>Hi, I'm <b>Sonia</b></h1>
 								<p>your new friend from Indonesia.<br />
 								I sketch, write codes <b>AND</b>, of course, haiku.<br />
-								Follow me this way, let me show you my legacy.</p>
+								This way, let me guide you through my legacy.</p>
 							</div>
 						</div>
 						<nav>
 							<ul>
 								<li><a href="#projects">Projects</a></li>
-								<li><a href="#gallery">Gallery</a></li>
+								<li><a href="#galeri">Gallery</a></li>
 								<li><a href="#haiku">Haiku</a></li>
 								<li><a href="#contact">Contact</a></li>
 								<!-- <li><a href="#elements">Elements</a></li> -->
@@ -101,20 +101,44 @@ for c in range(nc):
 								</section>
 								
 
-								<p><br /><br />By the way, check out my <a href="#gallery">awesome artwork</a>.</p>
+								<p><br /><br />By the way, check out my <a href="#galeri">awesome artworks</a>.</p>
 							</article>
 
 						<!-- Gallery -->
-							<article id="gallery">
+							<article id="galeri">
 								<h2 class="major">Gallery</h2>
 								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Don't you think <a href="#haiku">other form of art</a> would be awesome too?</p>
+								<p>I draw and sketch a lot when I'm bored in class. You can see here some of what I can save from a disaster. But my recent drawings are digital, and I'll show them first at the top because I'm so proud of them. They're some kind of coin I submitted for a contest in a really amazing <a href="https://www.renshuu.org/" target="_blank">Japanese learning site</a> I use. Click the images to take a closer look.</p>
+
+								<div class="gallery">
+									<img src="images/coin-acuteagawa-thumbnail.png" alt="Acutagawa" onclick="openModal('images/coin-acuteagawa.png')">
+									<img src="images/coin-hokuto-thumbnail.png" alt="The Big Dipper (Great Bear)" onclick="openModal('images/coin-hokuto.png')">
+									<img src="images/coin-maou-thumbnail.png" alt="The Devil Dance" onclick="openModal('images/coin-maou.png')">
+									<img src="images/syafiq-sketch-thumbnail.jpg" alt="Ahmad Syafiq Sketch" onclick="openModal('images/syafiq-sketch.jpg')">
+									<img src="images/syafiq-colored-thumbnail.png" alt="Ahmad Syafiq" onclick="openModal('images/syafiq-colored.png')">
+									<img src="images/twilight-thumbnail.jpg" alt="Twilight" onclick="openModal('images/twilight.jpg')">
+									<img src="images/mirror-thumbnail.jpg" alt="Mirrors" onclick="openModal('images/mirror.jpg')">
+								</div>
+								
+								<!-- Pop-up Modal -->
+								<div id="popup-modal" class="modal">
+									<span class="close" onclick="closeModal()">&times;</span>
+									<img id="popup-image" class="modal-content" src="" alt="">
+								</div>
+								<p><br/>I don't know but I really love drawing eyes, and I actually have a collection of eyes I doodled on Google Keep on the little screen of my phone when I was inspired by Avatar the Legend of Aang, so... yeah. And an addition of a turquoise eye I painted (doodled) with watercolor on a little piece of paper once upon a time.</p>
+								<div class="gallery">
+									<img src="images/Forest-thumbnail.png" alt="ATLA" onclick="openModal('images/Forest.png')">
+									<img src="images/Storm-thumbnail.png" alt="ATLA" onclick="openModal('images/Storm.png')">
+									<img src="images/Glacier-thumbnail.png" alt="ATLA" onclick="openModal('images/Glacier.png')">
+									<img src="images/Volcano-thumbnail.png" alt="ATLA" onclick="openModal('images/Volcano.png')">
+									<img src="images/topazeye-thumbnail.jpg" alt="ATLA" onclick="openModal('images/topazeye.jpg')">
+								</div>
+								<p><br/>Wait for more drawings! I'll upload them in no time.<br />Now, don't you think <a href="#haiku">other form of art</a> would be awesome too?</p>
 							</article>
 
 						<!-- Haiku -->
 							<article id="haiku">
-								<h2 class="major">Haiku Corner</h2>
+								<h2 class="major">Haiku</h2>
 								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
                 <div class="flipquote">
                   <div class="front">
@@ -124,7 +148,7 @@ for c in range(nc):
                     <blockquote>俳句とは<br />星空と海<br />僕と君</blockquote>
                   </div>
                 </div>
-								<p>Click any card to see the English version. Enjoy!</p>
+								<p>Let's see if you can guess the theme in each one. Click any card to see the English version. Enjoy!</p>
                 <div class="card-container">
                   <div class="card">
                     <div class="front">
@@ -262,7 +286,7 @@ for c in range(nc):
                   </div>
 
                 </div>
-                <p><br/>Was it cool (or warm) enough? Which one is your favorite? <a href="#contact">Tell me!</a></p>
+                <p><br/> Can you feel the <i> vibe </i> in every verse? Which one is your favorite?<br/><a href="#contact">Let me know</a> your thoughts!</p>
 							</article>
 
 						<!-- Contact -->
