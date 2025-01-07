@@ -1140,9 +1140,12 @@ input, select, textarea {
 			-ms-transition-delay: 0.75s;
 			transition-delay: 0.75s;
 			background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("../../images/overlay.png");
-			background-size: auto, 256px 256px;
-			background-position: center, center;
-			background-repeat: no-repeat, repeat;
+			background-size: auto,
+ 256px 256px;
+			background-position: center,
+ center;
+			background-repeat: no-repeat,
+ repeat;
 			z-index: 2;
 		}
 
@@ -1656,3 +1659,72 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+
+/* Card */
+	.card-container {
+		display: flex; /* Lay the cards side by side */
+		flex-wrap: wrap;
+		gap: 20px; /* Add space between the cards */
+		justify-content: center; /* Center the cards horizontally */
+		flex-wrap: wrap; /* Wrap to the next row on small screens */
+	}
+
+	.card {
+		width: 270px;
+		height: 180px;
+		position: relative;
+		transform-style: preserve-3d;
+		transition: transform 0.8s;
+		cursor: pointer;
+	}
+
+	.card .front, .card .back {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		backface-visibility: hidden; /* Hides the back side */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: 2px solid #aba9aa;
+		border-radius: 8px;
+		background-color: rgba(25, 19, 22, 0.5);
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.card .back {
+		background-color: #211f20;
+		transform: rotateY(180deg); /* Initially hidden */
+	}
+
+	.card-container .card.flipped {
+		transform: rotateY(180deg); /* Flips the card */
+	}
+
+/* Flipquote */
+	.flipquote {
+		width: 200px;
+		height: 150px;
+		position: relative;
+		transform-style: preserve-3d;
+		transition: transform 0.8s;
+		cursor: pointer;
+	}
+
+	.flipquote .front, .flipquote .back {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		backface-visibility: hidden;
+		display: flex;
+		justify-content: left;
+		align-items: center;
+	}
+
+	.flipquote .back {
+		transform: rotateX(180deg);
+	}
+
+	.flipquote.flipped {
+		transform: rotateX(180deg);
+	}

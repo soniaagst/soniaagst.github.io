@@ -585,3 +585,24 @@
 	};
 
 })(jQuery);
+
+document.getElementById("contact-form").addEventListener("submit", function (event) {
+  const message = document.querySelector('textarea[name="message"]').value;
+
+  if (!message.trim()) {
+    event.preventDefault(); // Stop form submission
+    alert("Please fill in the message field!"); // Show an error message
+  }
+});
+
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+});
+
+document.querySelectorAll('.flipquote').forEach(flipquote => {
+  flipquote.addEventListener('click', () => {
+    flipquote.classList.toggle('flipped');
+  });
+});

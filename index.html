@@ -20,7 +20,7 @@
 				<!-- Header -->
 					<header id="header">
 						<div class="logo">
-							<span class="icon fa-moon"></span>
+							<span class="icon solid fa-hat-wizard"></span>
 						</div>
 						<div class="content">
 							<div class="inner">
@@ -46,39 +46,22 @@
 
 						<!-- Projects -->
 							<article id="projects">
-								<h2 class="major">My Projects</h2>
+								<h2 class="major">Projects</h2>
 								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-								<p>Here are some of my coursework projects. I mainly write in Python.</p>
-								<hr />
+								<p>Here are some of my coursework projects. I mainly write in Python.<br/><br/></p>
 								<!-- Project 1 -->
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Tutor Optimization and Scheduling using ILP</h3>
 									<p>It minimizes the number of tutor needed in cram school when recruiting tutors, and make a learning schedule for classes based on the minimum number of tutors, using Integer Linear Programming. Here's a snippet.</p>
 									<pre><code>
-m = mip.Model("Optimimsasi Penjadwalan Bimbel")
-
-######################### VARIABLES #########################
-
-g = [m.add_var(var_type=mip.INTEGER) for p in range(np)] # banyak guru
-t = [[m.add_var(var_type=mip.INTEGER) for h in range(nh)] for p in range(np)] # banyaknya transfer
-
-x = []
-y = []
-
+# kendala3: setiap kelas tidak boleh masuk 2 hari berurutan
 for c in range(nc):
-
-	# slot jadwal
-	x.append([[[[m.add_var(var_type=mip.BINARY) for s in range(ns)] for h in range(nh)] for p in range(np)] for k in range(nk[c])])
-
-	# variabel yg memutuskan bahwa kelompok k masuk hari h
-	y.append([[m.add_var(var_type=mip.BINARY) for h in range(nh)] for k in range(nk[c])])
-
-######################### OBJECTIVE FUNCTION #########################
-
-m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(t[p][h] for p in range(np) for h in range(nh)))
+  for k in range(nk[c]):
+    for h in range(5):
+        m += y[c][k][h] + y[c][k][h+1] <= 1
 									</code></pre>
-									<a href="https://github.com/soniaagst/ilp-tutor-number-optimization-and-scheduling" target="_blank" class="button small">View on GitHub</a>
+									<a href="https://github.com/soniaagst/ilp-tutor-number-optimization-and-scheduling" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
 
@@ -87,7 +70,7 @@ m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(
 									<i class="icon solid fa-code"></i>
 									<h3>Vigenere Cipher: Encryption and Cryptanalysis</h3>
 									<p>It encrypts and do cryptanalysis to a given Sundanese text utilizing Vigenere cipher.</p>
-									<a href="https://github.com/soniaagst/vigenere-cipher-encryption-and-cryptanalysis" target="_blank" class="button small">View on GitHub</a>
+									<a href="https://github.com/soniaagst/vigenere-cipher-encryption-and-cryptanalysis" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
 
@@ -96,7 +79,7 @@ m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(
 									<i class="icon solid fa-code"></i>
 									<h3>Unconstrained Nonlinear Programming</h3>
 									<p>It solves unconstrained nonlinear optimization problems and provides several tools or methods to do so.</p>
-									<a href="https://github.com/soniaagst/unconstrained-nonlinear-programming" target="_blank" class="button small">View on GitHub</a>
+									<a href="https://github.com/soniaagst/unconstrained-nonlinear-programming" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
 
@@ -105,7 +88,7 @@ m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Syndrome Decoding</h3>
 									<p>It decodes code in fininte field using the code's syndrome. To avoid confusion, the 'code' here is the encoding-decoding-related code (in which it's numbers in this project), not the coding code.</p>
-									<a href="https://github.com/soniaagst/coding-theory/tree/main/syndrome-decoding" target="_blank" class="button small">View on GitHub</a>
+									<a href="https://github.com/soniaagst/coding-theory/tree/main/syndrome-decoding" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
 
@@ -114,46 +97,187 @@ m.objective = mip.minimize(b_1*mip.xsum(g[p] for p in range(np)) + b_2*mip.xsum(
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Nonlinear Codes</h3>
 									<p>It generates different types of nonlinear code, such as Preparata code and Nordstrom-Robinson code.</p>
-									<a href="https://github.com/soniaagst/coding-theory/blob/main/nonlinear-codes.ipynb" target="_blank" class="button small">View on GitHub</a>
+									<a href="https://github.com/soniaagst/coding-theory/blob/main/nonlinear-codes.ipynb" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
-								<hr />
+								
 
-								<p>By the way, check out my <a href="#gallery">awesome artwork</a>.</p>
+								<p><br /><br />By the way, check out my <a href="#gallery">awesome artwork</a>.</p>
 							</article>
 
 						<!-- Gallery -->
 							<article id="gallery">
 								<h2 class="major">Gallery</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
+								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
 								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+								<p>Don't you think <a href="#haiku">other form of art</a> would be awesome too?</p>
 							</article>
 
 						<!-- Haiku -->
 							<article id="haiku">
 								<h2 class="major">Haiku Corner</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet.</p>
-								<blockquote>
-									一歩 しか<br />
-									動けず 負たん
-									王様 だ
-								</blockquote>
+								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
+                <div class="flipquote">
+                  <div class="front">
+                    <blockquote>What is haiku<br />It is the sky and the sea<br />It is you and me</blockquote>
+                  </div>
+                  <div class="back">
+                    <blockquote>俳句とは<br />星空と海<br />僕と君</blockquote>
+                  </div>
+                </div>
+								<p>Click any card to see the English version. Enjoy!</p>
+                <div class="card-container">
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />一歩しか<br />動けず負たん<br />王様だ</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />A burden<br />That only move a step<br />The King, it is</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />放課後の<br />オレンジ色に<br />石飛ばし</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />To the amber color<br />Of the after school sunset<br />Skipping stones</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />漫画の中<br />広がる世界<br />魔法かな</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />Within manga pages<br />A world unfolds before the eyes<br />I wonder if it's magic</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />にぎやかな<br />光の都<br />見えず星</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />Bustling<br />City of light<br />Unseen stars</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />駅メロディ<br />駆け込み乗車<br />雨しずく</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />Station melody<br />Rushing to catch the train<br />Raindrops</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />梅雨の雨<br />音が癒しが<br />どろだらけ</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />Rains on rainy season<br />Soothing sounds<br />And muddy</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />遊んだり<br />遊ばされたり<br />この社会</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-hat-wizard"></i><br />I'm sorry, but<br />I'm too scared<br />To show the meaning</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />舞い落ちて<br />ささやく桜<br />春の歌</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />Petals flutter down<br />Whispering cherry blossoms<br />Springs lullaby</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />バレー部と<br />汗と笑顔で<br />青春だ</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />Alongside with the volleyball club<br />And with sweat and smiles<br />And that is youth</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />春の海<br />ひねもすのたり<br />流れ寄る</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />The calm sea of spring<br />All day long, peacefully<br />Drifting to the shore</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />大人もね<br />かくれんぼして<br />宿敵と</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-hat-wizard"></i><br />I'm sorry, but<br />I'm too scared<br />To show the meaning</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />妹の<br />友おり守り<br />お姉ちゃんは</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />Little sister's<br />Friend and guardian<br />Big sister is</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />世界には<br />おどって笑え<br />できる内</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />In this world<br />Dance and laugh<br />While the moment lasts</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />怖さあり<br />美しさあり<br />自然とは</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />There is fear<br />There is beauty<br />Such is nature</p>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="front">
+                      <p><i class="icon solid fa-pen-nib"></i><br />羽ばたきな<br />飛べ跳ね回れ<br />幸せに</p>
+                    </div>
+                    <div class="back">
+                      <p><i class="icon solid fa-quote-left"></i><br />Spread your wings<br />Soar and frisk around<br />May happiness be with you</p>
+                    </div>
+                  </div>
+
+                </div>
+                <p><br/>Was it cool (or warm) enough? Which one is your favorite? <a href="#contact">Tell me!</a></p>
 							</article>
 
 						<!-- Contact -->
 							<article id="contact">
-								<h2 class="major">Contact Me</h2>
-								<p>Feel free to send me a message — no need to leave your name!</p>
+								<h2 class="major">Contact</h2>
+								<p>Feel free to send me a message — no need to leave your name!<br />I'll reach to you only if you provide me with an email.</p>
 								<form action="https://formspree.io/f/xrbboydr" method="post" id="contact-form">
 									<div class="fields">
 										<div class="field half">
 											<label for="name">Name</label>
-											<input type="text" name="name" id="name" placeholder="Jane Doe" />
+											<input type="text" name="name" id="name" placeholder="Giorno Giovanna" />
 										</div>
 										<div class="field half">
 											<label for="email">Email</label>
-											<input type="text" name="email" id="email" placeholder="janedoe@example.com" required />
+											<input type="text" name="email" id="email" placeholder="giogio@example.com" />
 										</div>
 										<div class="field">
 											<label for="message">Message</label>
@@ -434,16 +558,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<script>
-				document.getElementById("contact-form").addEventListener("submit", function (event) {
-					const message = document.querySelector('textarea[name="message"]').value;
-			
-					if (!message.trim()) {
-						event.preventDefault(); // Stop form submission
-						alert("Please fill in the message field!"); // Show an error message
-					}
-				});
-			</script>
 
 	</body>
 </html>
