@@ -1686,14 +1686,14 @@ input, select, textarea {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		border: 2px solid #aba9aa;
+		border: 2px solid #a9aaab;
 		border-radius: 8px;
-		background-color: rgba(25, 19, 22, 0.5);
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		background-color: rgba(19, 22, 25, 0.5);
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 	}
 
 	.card .back {
-		background-color: #211f20;
+		background-color: #26292e;
 		transform: rotateY(180deg); /* Initially hidden */
 	}
 
@@ -1741,7 +1741,7 @@ input, select, textarea {
 		height: auto;
 		border-radius: 8px; /* Optional: Rounded corners */
 		transition: transform 0.3s, opacity 0.3s; /* Smooth hover effect */
-		box-shadow: 0 4px 6px rgba(214, 233, 247, 0.1); /* Soft shadow for each image */
+		box-shadow: 0 4px 6px rgba(243, 249, 253, 0.15); /* Soft shadow for each image */
 		cursor: pointer;
 	}
 	
@@ -1766,8 +1766,67 @@ input, select, textarea {
 	}
 
 	.modal-content {
-		max-width: auto;
-		max-height: 35%;
+		max-width: 95%;
+		max-height: 900px;
 		border-radius: 8px;
 		box-shadow: 4px 7px 7px 7px rgba(0, 0, 0, 0.5);
+	}
+
+	/* Shelf Gallery Styling */
+	.shelf-gallery {
+		display: flex;
+		flex-direction: column;
+		gap: 20px; /* Space between rows */
+	}
+
+	.shelf {
+		display: flex;
+		overflow-x: auto; /* Horizontal scrolling */
+		gap: 15px; /* Space between items */
+		scroll-behavior: smooth; /* Smooth scrolling effect */
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.shelf::-webkit-scrollbar {
+		height: 7px; /* Horizontal scrollbar height */
+	}
+
+	.shelf::-webkit-scrollbar-thumb {
+		background-color: #88888850; /* Scrollbar color */
+		border-radius: 10px;
+	}
+
+	.shelf::-webkit-scrollbar-thumb:hover {
+		background-color: #555; /* Scrollbar hover color */
+	}
+
+	.shelf-item {
+		flex-shrink: 0;
+		margin-top: -5px; /* Adjust to visually center after padding */
+		border-radius: 8px;
+		width: auto; /* Thumbnail width */
+		height: auto;
+		text-align: center;
+	}
+
+	.shelf-item img {
+		width: auto;
+		height: 180px;
+		border-radius: 8px;
+		box-shadow: 0 4px 6px rgba(1, 22, 37, 0.75);
+		opacity: 0.8;
+		transition: transform 0.3s;
+		cursor: pointer;
+	}
+
+	.shelf-item img:hover {
+		transform: scale(1.05); /* Zoom effect */
+		opacity: 1;
+	}
+
+	.caption {
+		margin-top: 5px;
+		font-size: 14px;
+		color: #b9bbbd;
 	}

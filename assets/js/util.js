@@ -620,3 +620,36 @@ function closeModal() {
   const modal = document.getElementById('popup-modal');
   modal.style.display = 'none'; // Hide the modal
 }
+
+function autoSlideShelves() {
+  const autoShelves = document.querySelectorAll('.shelf.auto-slide');
+
+  autoShelves.forEach((shelf) => {
+    let scrollAmount = 0;
+    let slideTimer;
+
+    const startSliding = () => {
+      slideTimer = setInterval(() => {
+        shelf.scrollLeft += 1; // Move 1px to the right
+        scrollAmount += 1;
+
+        if (scrollAmount >= shelf.scrollWidth - shelf.clientWidth) {
+          scrollAmount = 0; // Reset to the start
+          shelf.scrollLeft = 0;
+        }
+      }, 20); // Use custom speed or default to 20ms
+    };
+
+    const stopSliding = () => clearInterval(slideTimer);
+
+    // Start sliding when the page loads
+    startSliding();
+
+    // Pause on hover
+    shelf.addEventListener('mouseenter', stopSliding);
+    shelf.addEventListener('mouseleave', startSliding);
+  });
+}
+
+// Call the function
+autoSlideShelves();
