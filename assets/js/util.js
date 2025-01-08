@@ -613,19 +613,9 @@ function openModal(imageSrc) {
   modal.style.display = 'flex'; // Show the modal
   modalImg.src = imageSrc; // Set the image source
 
-	// Stop clicks on the image from closing the modal or affecting other elements
-	modalImg.addEventListener('click', (e) => {
-		e.stopPropagation();
-	});
-
-	// Allow clicking anywhere outside the image to close the modal
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
+  // Close the modal when clicking anywhere outside the image
+  modal.onclick = () => closeModal();
 }
-
 function closeModal() {
   const modal = document.getElementById('popup-modal');
   modal.style.display = 'none'; // Hide the modal
