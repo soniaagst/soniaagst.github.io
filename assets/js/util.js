@@ -610,12 +610,17 @@ function openModal(imageSrc) {
   const modal = document.getElementById('popup-modal');
   const modalImg = document.getElementById('popup-image');
 
-  modal.style.display = 'flex'; // Show the modal
   modalImg.src = imageSrc; // Set the image source
 
-  // Close the modal when clicking anywhere outside the image
+	// Dynamically position the popup based on the clicked image
+	modal.style.top = `${window.scrollY + 320}px`;
+	modal.style.left = `50%`;
+	modal.style.display = 'flex'; // Show the modal
+
+  // Close the modal when clicking inside the image
   modal.onclick = () => closeModal();
 }
+
 function closeModal() {
   const modal = document.getElementById('popup-modal');
   modal.style.display = 'none'; // Hide the modal

@@ -1735,12 +1735,12 @@ input, select, textarea {
 		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 		gap: 15px; /* Space between images */
 	}
-	
+
 	.gallery img {
 		width: 100%; /* Make images responsive */
 		height: auto;
 		border-radius: 8px; /* Optional: Rounded corners */
-		transition: transform 0.3s, opacity 0.3s; /* Smooth hover effect */
+		transition: transform 0.3s ease, opacity 0.3s; /* Smooth hover effect */
 		box-shadow: 0 4px 6px rgba(243, 249, 253, 0.15); /* Soft shadow for each image */
 		cursor: pointer;
 	}
@@ -1750,29 +1750,43 @@ input, select, textarea {
 		opacity: 0.8; /* Dim slightly */
 	}
 
+/* Adjust for mobile screens */
+	@media (max-width: 768px) {
+		.gallery {
+			grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Smaller columns */
+			gap: 5px;
+		}
+
+		.gallery img {
+			width: 100%; /* Make thumbnails smaller */
+			height: auto;
+		}
+	}
+
 /* Modal Styling */
 	.modal {
 		display: none; /* Hidden by default */
-		position: fixed; /* Ensures the modal stays in the viewport */
+		position: absolute; /* Ensures the modal stays in the viewport */
 		z-index: 1000;
 		top: 50%;
 		left: 50%;
-		width: 220%;
-		height: 100%;
 		background-color: rgba(27, 31, 34, 0.5); /* Semi-transparent background */
 		justify-content: center;
 		align-items: center;
 		transform: translate(-50%, -50%); /* Centers modal in the viewport */
-	}
-
-	.modal-content {
-		max-width: 95%;
-		max-height: 900px;
+		padding: 10px;
 		border-radius: 8px;
 		box-shadow: 4px 7px 7px 7px rgba(0, 0, 0, 0.5);
 	}
 
-	/* Shelf Gallery Styling */
+	.modal-content {
+		display: block;
+		max-width: 95vw;
+		max-height: 95vh;
+		
+	}
+
+/* Shelf Gallery Styling */
 	.shelf-gallery {
 		display: flex;
 		flex-direction: column;
@@ -1814,8 +1828,8 @@ input, select, textarea {
 		width: auto;
 		height: 180px;
 		border-radius: 8px;
-		box-shadow: 0 4px 6px rgba(1, 22, 37, 0.75);
-		opacity: 0.8;
+		box-shadow: 0 4px 6px rgba(255, 253, 235, 0.2);
+		opacity: 0.95;
 		transition: transform 0.3s;
 		cursor: pointer;
 	}

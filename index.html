@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Sonia — Programmer</title>
+		<title>Sonia Augustin</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -53,7 +53,7 @@
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Tutor Optimization and Scheduling using ILP</h3>
-									<p>It minimizes the number of tutor needed in cram school when recruiting tutors, and make a learning schedule for classes based on the minimum number of tutors, using Integer Linear Programming. Here's a snippet.</p>
+									<p>It minimizes the number of tutor needed in cram school when recruiting tutors, and make a learning schedule for classes based on the minimum number of tutors, using Integer Linear Programming. This is one of the constraints in the scheduling problem.</p>
 									<pre><code>
 # kendala3: setiap kelas tidak boleh masuk 2 hari berurutan
 for c in range(nc):
@@ -69,7 +69,24 @@ for c in range(nc):
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Vigenere Cipher: Encryption and Cryptanalysis</h3>
-									<p>It encrypts and do cryptanalysis to a given Sundanese text utilizing Vigenere cipher.</p>
+									<p>It encrypts and do cryptanalysis to a given Sundanese text utilizing Vigenere cipher. Here's a function for counting the coincidence values for each row in the ciphertext matrix, <code>x</code> is the row.</p>
+									<pre><code>
+# Fungsi untuk menghitung nilai koinsiden untuk setiap baris pada matriks
+def countings (x):
+  count_table = {} # Variabel yg menyimpan kemunculan huruf
+  freq_table = {} # Variabel yg menyimpan frekuensi kemunculan huruf
+  n = 0 # Variabel yg menyimpan jumlah huruf dalam teks sampel
+  spi = 0 # Variabel jumlah kuadrat dari setiap nilai pi
+  ranger = [i for i in range(27)]
+  for i in range(27):
+    count_table[i] = x.count(i)
+    n = n + count_table[i]
+  for i in range(27):
+    freq_table[i] = count_table[i]/n
+    pi = freq_table[i]**2
+    spi += pi
+  return spi
+									</code></pre>
 									<a href="https://github.com/soniaagst/vigenere-cipher-encryption-and-cryptanalysis" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
@@ -78,7 +95,25 @@ for c in range(nc):
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Unconstrained Nonlinear Programming</h3>
-									<p>It solves unconstrained nonlinear optimization problems and provides several tools or methods to do so.</p>
+									<p>It solves unconstrained nonlinear optimization problems and provides several tools or methods to do so. One of the methods is Steepest Decent, so peek at the function.</p>
+									<pre><code>
+def steepest_decent(Q, b, x0, maxiter = 500, eps = 1E-4):
+  df = lambda x: (Q @ x) - b
+  x = x0
+  k = 0
+  while k < maxiter:
+    alpha = (df(x) @ df(x)) / (df(x) @ Q @ df(x))
+    x = x - alpha * df(x)
+    k = k + 1
+    error = np.linalg.norm(df(x))
+    if error < eps:
+      break
+  print('x0 =', x0)
+  print('iterasi ke-', k)
+  print('x =', x)
+  print('error =', error)
+  print()
+									</code></pre>
 									<a href="https://github.com/soniaagst/unconstrained-nonlinear-programming" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
@@ -87,7 +122,39 @@ for c in range(nc):
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Syndrome Decoding</h3>
-									<p>It decodes code in fininte field using the code's syndrome. To avoid confusion, the 'code' here is the encoding-decoding-related code (in which it's numbers in this project), not the coding code.</p>
+									<p>It decodes code in fininte field using the code's syndrome. To avoid confusion, the <b>'code'</b> here is not the <b><i>coding</i></b> code, but the <b><i>encoding-decoding-related</i></b> code (in which it is numbers). Here's a function for generating syndrome look-up table for the cosets from basis <code>H</code> in the Galois field <code>ffield</code>.</p>
+									<pre><code>
+def generateLUT(H, ffield):
+    n = len(H[0])
+    n_k = len(H)
+    cLeader = np.array([0 for i in range(n)])
+    cLeader = ffield(cLeader)
+    synd = cLeader @ np.transpose(H)
+
+    syndromes = []
+    cosLeds = []
+    syndromes.append(synd)
+    cosLeds.append(cLeader)
+    p = np.asarray(syndromes)
+
+    syndMaxSize = ffield.order**n_k
+    while(len(p) < syndMaxSize):
+        cLeader = generateNext(cLeader, ffield)
+        synd = cLeader @ np.transpose(H)
+        isIn = isArrInArrays(p, synd)
+        if not isIn:
+            syndromes.append(synd)
+            cosLeds.append(cLeader)
+            p = np.asarray(syndromes)
+    return np.asarray(cosLeds), p
+
+cLeaders, synd = generateLUT(dualBase(C, GF), GF)
+
+print("coset leader | syndrome")
+for i in range(len(synd)):
+    print(cLeaders[i], " | ", synd[i])
+									</code></pre>
+									<p>I made an .exe file for this project, you can try to make an executable too using the <code>setup.py</code>. However, there's a python notebook file for a better view of the project.</p>
 									<a href="https://github.com/soniaagst/coding-theory/tree/main/syndrome-decoding" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
@@ -96,7 +163,48 @@ for c in range(nc):
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Nonlinear Codes</h3>
-									<p>It generates different types of nonlinear code, such as Preparata code and Nordstrom-Robinson code.</p>
+									<p>It generates different types of nonlinear code, such as Preparata code and Nordstrom-Robinson code. This is for generating the Preparata code of oder <code>m</code>.</p>
+									<pre><code>
+def preparata(m):
+  n2 = 2**(2*m - 1)
+
+  # himpunan vektor u dan v
+  U = product([1, 0], repeat=n2)
+  U = np.reshape(list(U), (-1, n2))
+  V = U
+
+  P = []
+  for i in range(len(U)):
+    for j in range(len(V)):
+
+      # bobot u dan v genap
+      if (sum(U[i][:]) % 2 == 0) and (sum(V[j][:]) % 2 == 0):
+
+        a = 0
+        b = 0
+        # jumlahan indeks tempat munculnya digit 1 di u dan v adalah sama
+        for k in range(n2):
+          if U[i][k] == 1:
+            a = a + k
+          if V[j][k] == 1:
+            b = b + k
+        if a == b:
+
+          f = 0
+          g = 0
+          h = 0
+          for l in range(n2):
+            if U[i][l] == 1:
+              f = f + l**3
+              g = g + l
+            if V[j][l] == 1:
+              h = h + l**3
+          if f + (g**3) == h:
+
+            p = np.concatenate((U[i],  V[j]))
+            P.append(p)
+  return P
+									</code></pre>
 									<a href="https://github.com/soniaagst/coding-theory/blob/main/nonlinear-codes.ipynb" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								
@@ -108,22 +216,22 @@ for c in range(nc):
 							<article id="galeri">
 								<h2 class="major">Gallery</h2>
 								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p><br/><b>PLEASE DO NOT STEAL!</b><br />Click at the images to take a closer look.</p>
-								<p>In the last autumn, I submitted some kind of coins for a contest in a really amazing Japanese learning site I use, <a href="https://www.renshuu.org/" target="_blank"><i>renshuu.org</i></a>. The coins used for a gacha system in that site. I'll show them first at the top row because they're so cute, followed by another lovely drawings.</p>
-
+								<p><br/><b>PLEASE DO NOT STEAL!</b><br />Click at any image to take a closer look. Click again to close.</p>
+								<p>In the last autumn, I submitted some kind of coins for a contest in a really amazing Japanese learning site I use, <a href="https://www.renshuu.org/" target="_blank"><i>renshuu.org</i></a>. The coins used for a gacha system in that site. I'll show them first at the top row because they're so cute, followed by another lovely drawings. <i class="icon solid fa-paw"></i></p>
+								
 								<div class="gallery">
 									<img src="images/coin-acuteagawa-thumbnail.png" alt="Acutagawa" onclick="openModal('images/coin-acuteagawa.png')">
 									<img src="images/coin-hokuto-thumbnail.png" alt="The Big Dipper (Great Bear)" onclick="openModal('images/coin-hokuto.png')">
 									<img src="images/coin-maou-thumbnail.png" alt="The Devil Dance" onclick="openModal('images/coin-maou.png')">
-									<img src="images/syafiq-colored-thumbnail.png" alt="Ahmad Syafiq" onclick="openModal('images/syafiq-colored.png')">
+									<img src="images/syafiq-colored-thumbnail.png" alt="" onclick="openModal('images/syafiq-colored.png')">
 									<img src="images/logo-gnu.png" alt="GNU" onclick="openModal('images/logo-gnu.png')">
 									<img src="images/twilight-thumbnail.jpg" alt="Twilight" onclick="openModal('images/twilight.jpg')">
 								</div>
 
-								<p><br/>This big painting below is my favorite. Painted with watercolor on paper, it's a scene in an anime called <i>Hakkenden</i>. It's so beautiful I'm obsessed. But, something is missing. <i>Can you guess what that is?</i></p>
+								<p><br/>That cute little blue elephant is actually a logo for a merch-selling entity I founded for my organization's fundraising at uni. Move on.<br />This big painting below is my favorite. <i class="icon regular fa-star"></i> Painted with watercolor on paper, it's a scene in an anime called <i>Hakkenden</i>. It's so beautiful I'm obsessed. But, something is missing. <i>Can you guess what that is?</i></p>
 								<div class="gallery"><img src="images/hakkenden21.jpg" alt="" onclick="openModal('images/hakkenden.jpg')" ></div>
 
-								<p><br/>I don't know but I really love drawing eyes so much, and I actually have a collection of eyes I doodled on Google Keep on my phone's little screen. Yes, I was inspired by the 4 elements in <i>Avatar the Legend of Aang</i>. An addition, a turquoise eye I painted (doodled) with watercolor on a little piece of paper. And some other Keep notes doodles.</p>
+								<p><br/>I don't know but I really love drawing eyes so much, and I actually have a collection of eyes I doodled on Google Keep on my phone's little screen. Yes, I was inspired by the 4 elements in <i>Avatar the Legend of Aang</i>. An addition, a turquoise eye I painted (doodled) with watercolor on a little piece of paper. And some other Keep notes doodles. <i class="icon solid fa-fan"></i></p>
 								<div class="shelf auto-slide">
 									<div class="shelf-item"><img src="images/Forest-thumbnail.png" alt="ATLA" onclick="openModal('images/Forest.png')"></div>
 									<div class="shelf-item"><img src="images/Storm-thumbnail.png" alt="ATLA" onclick="openModal('images/Storm.png')"></div>
@@ -134,70 +242,63 @@ for c in range(nc):
 									<div class="shelf-item"><img src="images/sakura-thumbnail.jpg" alt="Sakura" onclick="openModal('images/sakura.jpg')"></div>
 								</div>
 
-								<p><br/>And some abstracts. These are not necessarily good, but the colors are nice in my opinion. <i>Try to find my name in the first image!</i></p>
-
+								<p><br/>And some abstracts. These are not necessarily good, but the colors are nice in my opinion. <i>Try to find my name in the first image!</i> <i class="icon solid fa-palette"></i></p>
 								<div class="shelf">
-									<div class="shelf-item"><img src="images/mirror-thumbnail.jpg" alt="Mirrors" onclick="openModal('images/mirror.jpg')"></div>
-									<div class="shelf-item"><img src="images/abstract01-thumbnail.jpg" alt="Abstract01" onclick="openModal('images/abstract01.jpg')"></div>
-									<div class="shelf-item"><img src="images/abstract02-thumbnail.jpg" alt="Abstract02" onclick="openModal('images/abstract02.jpg')"></div>
+									<div class="shelf-item"><img src="images/mirror-thumbnail.jpg" alt="" onclick="openModal('images/mirror.jpg')"></div>
+									<div class="shelf-item"><img src="images/abstract01-thumbnail.jpg" alt="" onclick="openModal('images/abstract01.jpg')"></div>
+									<div class="shelf-item"><img src="images/abstract02-thumbnail.jpg" alt="" onclick="openModal('images/abstract02.jpg')"></div>
+									<div class="shelf-item"><img src="images/disintegrated_circuit-thumbnail.jpg" alt="" onclick="openModal('images/disintegrated_circuit.jpg')"></div>
 								</div>
 
-								<div class="shelf-gallery">
-									<!-- Shelf 1 -->
-									<p><br/>I sketch a lot when bored in class. But, most of the sketches below are gifts for a friend or family on their birthday (gifts are not drawn in class, of course).</p>
-									<div class="shelf auto-slide">
-										<div class="shelf-item">
-											<img src="images/sketch-rk.jpg" alt="Hana" onclick="openModal('images/sketch-rk.jpg')">
-										</div>
-										<div class="shelf-item">
-											<img src="images/sketch-mw.jpg" alt="Wulan" onclick="openModal('images/sketch-mw.jpg')">
-										</div>
-										<div class="shelf-item">
-											<img src="images/sketch-rn.jpg" alt="Revilda" onclick="openModal('images/sketch-rn.jpg')">
-										</div>
-										<div class="shelf-item">
-											<img src="images/sketch-ye.jpg" alt="Yusuf" onclick="openModal('images/sketch-ye.jpg')">
-										</div>
-										<div class="shelf-item">
-											<img src="images/sketch-hn.jpg" alt="Hafiz" onclick="openModal('images/sketch-hn.jpg')">
-										</div>
+								<p><br/>I sketch a lot when bored in class. But, most of the sketches below are gifts for a friend or family on their birthday (gifts are not drawn in class, of course). <i class="icon solid fa-pen"></i></p>
+								<div class="shelf auto-slide">
+									<div class="shelf-item">
+										<img src="images/sketch-whale.jpg" alt="Whale" onclick="openModal('images/sketch-whale.jpg')">
 									</div>
-									<!-- Shelf 2 -->
-									<div class="shelf auto-slide">
-										<div class="shelf-item">
-											<img src="images/sketch-whale.jpg" alt="Whale" onclick="openModal('images/sketch-whale.jpg')">
-											<!-- <p class="caption">Majestic Whale</p> -->
-										</div>
-										<div class="shelf-item">
-											<img src="images/sketch-kirizan.jpg" alt="Kirizan" onclick="openModal('images/sketch-kirizan.jpg')">
-										</div>
-										<div class="shelf-item">
-											<img src="images/syafiq-sketch-thumbnail.jpg" alt="Ahmad Syafiq Sketch" onclick="openModal('images/syafiq-sketch.jpg')">
-										</div>
-										<div class="shelf-item">
-											<img src="images/sketch-iori.jpg" alt="Iori" onclick="openModal('images/sketch-iori.jpg')">
-										</div>
-										<div class="shelf-item">
-											<img src="images/oneshot.jpg" alt="Oneshot" onclick="openModal('images/oneshot.jpg')">
-										</div>
+									<div class="shelf-item">
+										<img src="images/sketch-kirizan.jpg" alt="Kirizan" onclick="openModal('images/sketch-kirizan.jpg')">
+									</div>
+									<div class="shelf-item">
+										<img src="images/sketch-rk.jpg" alt="" onclick="openModal('images/sketch-rk.jpg')">
+									</div>
+									<div class="shelf-item">
+										<img src="images/sketch-mw.jpg" alt="" onclick="openModal('images/sketch-mw.jpg')">
+									</div>
+									<div class="shelf-item">
+										<img src="images/syafiq-sketch-thumbnail.jpg" alt="" onclick="openModal('images/syafiq-sketch.jpg')">
+									</div>
+									<div class="shelf-item">
+										<img src="images/sketch-iori.jpg" alt="Iori" onclick="openModal('images/sketch-iori.jpg')">
+									</div>
+									<div class="shelf-item">
+										<img src="images/sketch-rn.jpg" alt="" onclick="openModal('images/sketch-rn.jpg')">
+									</div>
+									<div class="shelf-item">
+										<img src="images/sketch-ye.jpg" alt="" onclick="openModal('images/sketch-ye.jpg')">
+									</div>
+									<div class="shelf-item">
+										<img src="images/sketch-hn.jpg" alt="" onclick="openModal('images/sketch-hn.jpg')">
+									</div>
+									<div class="shelf-item">
+										<img src="images/oneshot.jpg" alt="" onclick="openModal('images/oneshot.jpg')">
 									</div>
 								</div>
 
-								<p><br/>That SpongeBob one at the last definitely was drawn in the spirit of meme. Anyway, let's take a look at photographs of flowers and moon, because, why not. Indeed they're not drawings, but are so cool that I tempted to show off! The moon was photographed from the lens of a telescope when I was observing at <a href="https://www.instagram.com/imahnoong/" target="_blank"><i>Imah Noong</i></a> observatory and planetarium in Lembang, Bandung.</p>
-								
+								<p><br/>That SpongeBob comic one at the last was definitely drawn in the spirit of meme. Anyway, let's take a look at photographs of flowers and moon, because, why not. Indeed they're not drawings, but are so cool that I tempted to show off! The moon was photographed from the lens of a telescope when I was observing at <a href="https://www.instagram.com/imahnoong/" target="_blank"><i>Imah Noong</i></a> observatory and planetarium in Lembang, Bandung. <i class="icon solid fa-camera-retro"></i></p>
 								<div class="gallery">
-									<img src="images/flower-yellow.jpg" alt="flower-yellow" onclick="openModal('images/flower-yellow.jpg')">
+									<img src="images/flower-yellow.jpg" alt="" onclick="openModal('images/flower-yellow.jpg')">
 									<img src="images/imah-noong-thumbnail.jpg" alt="imah-noong" onclick="openModal('images/imah-noong.jpg')">
-									<img src="images/flower-blue.jpg" alt="flower-blue" onclick="openModal('images/flower-blue.jpg')">
+									<img src="images/flower-blue.jpg" alt="" onclick="openModal('images/flower-blue.jpg')">
 								</div>
 
-								<p><br/>I'm learning digital art and willing to make cuter drawings!<br />Now, don't you think <a href="#haiku">other form of art</a> would be awesome too?</p>
+								<p><br/>I'm learning digital art and willing to make more adorable drawings!<br />Now, don't you think <a href="#haiku">another form of art</a> would be awesome too?</p>
 								
 								<!-- Pop-up Modal -->
 								<div id="popup-modal" class="modal">
-									<span class="close" onclick="closeModal()">&times;</span>
 									<img id="popup-image" class="modal-content" src="" alt="">
+									<span class="close" onclick="closeModal()">&times;</span>
 								</div>
+								
 							</article>
 
 						<!-- Haiku -->
@@ -212,7 +313,7 @@ for c in range(nc):
                     <blockquote>俳句とは<br />星空と海<br />僕と君</blockquote>
                   </div>
                 </div>
-								<p>Let's see if you can guess the theme in each one. Click any card to see the English version. Enjoy! ___<i class="icon solid fa-pen-nib"></i></p>
+								<p>Let's see if you can guess the theme in each one. Click any card to see the English version. ✨ぜ✨ひ✨お楽しみください！＿＿<i class="icon solid fa-pen-nib"></i></p>
                 <div class="card-container">
                   <div class="card">
                     <div class="front">
@@ -389,33 +490,7 @@ for c in range(nc):
 						<!-- Elements -->
 							<article id="elements">
 								<h2 class="major">Elements</h2>
-
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
-
+							
 								<section>
 									<h3 class="major">Lists</h3>
 
@@ -442,13 +517,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 										<li>Etiam vel felis lorem.</li>
 										<li>Felis enim et feugiat.</li>
 									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-whatsapp"><span class="label">WhatsApp</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
 
 									<h4>Actions</h4>
 									<ul class="actions">
