@@ -1770,6 +1770,7 @@ input, select, textarea {
 		z-index: 1000;
 		top: 50%;
 		left: 50%;
+		width: 90vw;
 		background-color: rgba(27, 31, 34, 0.5); /* Semi-transparent background */
 		justify-content: center;
 		align-items: center;
@@ -1781,11 +1782,30 @@ input, select, textarea {
 
 	.modal-content {
 		display: block;
-		max-width: 95vw;
+		max-width: 90vw;
 		max-height: 95vh;
 		
 	}
 
+	.prev, .next {
+		position: absolute;
+		top: 50%;
+		color: white;
+		font-size: 36px;
+		cursor: pointer;
+		z-index: 10000;
+		transform: translateY(-50%);
+		user-select: none;
+	}
+	
+	.prev {
+		left: 10px;
+	}
+	
+	.next {
+		right: 10px;
+	}
+	
 /* Shelf Gallery Styling */
 	.shelf-gallery {
 		display: flex;
@@ -1844,3 +1864,4 @@ input, select, textarea {
 		font-size: 14px;
 		color: #b9bbbd;
 	}
+	

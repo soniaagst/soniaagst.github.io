@@ -54,13 +54,11 @@
 									<i class="icon solid fa-code"></i>
 									<h3>Tutor Optimization and Scheduling using ILP</h3>
 									<p>It minimizes the number of tutor needed in cram school when recruiting tutors, and make a learning schedule for classes based on the minimum number of tutors, using Integer Linear Programming. This is one of the constraints in the scheduling problem.</p>
-									<pre><code>
-# kendala3: setiap kelas tidak boleh masuk 2 hari berurutan
+									<pre><code class="language-python"># kendala3: setiap kelas tidak boleh masuk 2 hari berurutan
 for c in range(nc):
   for k in range(nk[c]):
     for h in range(5):
-        m += y[c][k][h] + y[c][k][h+1] <= 1
-									</code></pre>
+        m += y[c][k][h] + y[c][k][h+1] <= 1</code></pre>
 									<a href="https://github.com/soniaagst/ilp-tutor-number-optimization-and-scheduling" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
@@ -70,8 +68,7 @@ for c in range(nc):
 									<i class="icon solid fa-code"></i>
 									<h3>Vigenere Cipher: Encryption and Cryptanalysis</h3>
 									<p>It encrypts and do cryptanalysis to a given Sundanese text utilizing Vigenere cipher. Here's a function for counting the coincidence values for each row in the ciphertext matrix, <code>x</code> is the row.</p>
-									<pre><code>
-# Fungsi untuk menghitung nilai koinsiden untuk setiap baris pada matriks
+									<pre><code class="language-python"># Fungsi untuk menghitung nilai koinsiden untuk setiap baris pada matriks
 def countings (x):
   count_table = {} # Variabel yg menyimpan kemunculan huruf
   freq_table = {} # Variabel yg menyimpan frekuensi kemunculan huruf
@@ -85,8 +82,7 @@ def countings (x):
     freq_table[i] = count_table[i]/n
     pi = freq_table[i]**2
     spi += pi
-  return spi
-									</code></pre>
+  return spi</code></pre>
 									<a href="https://github.com/soniaagst/vigenere-cipher-encryption-and-cryptanalysis" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
@@ -96,8 +92,7 @@ def countings (x):
 									<i class="icon solid fa-code"></i>
 									<h3>Unconstrained Nonlinear Programming</h3>
 									<p>It solves unconstrained nonlinear optimization problems and provides several tools or methods to do so. One of the methods is Steepest Decent, so peek at the function.</p>
-									<pre><code>
-def steepest_decent(Q, b, x0, maxiter = 500, eps = 1E-4):
+									<pre><code class="language-python">def steepest_decent(Q, b, x0, maxiter = 500, eps = 1E-4):
   df = lambda x: (Q @ x) - b
   x = x0
   k = 0
@@ -112,8 +107,7 @@ def steepest_decent(Q, b, x0, maxiter = 500, eps = 1E-4):
   print('iterasi ke-', k)
   print('x =', x)
   print('error =', error)
-  print()
-									</code></pre>
+  print()</code></pre>
 									<a href="https://github.com/soniaagst/unconstrained-nonlinear-programming" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								<hr />
@@ -123,8 +117,7 @@ def steepest_decent(Q, b, x0, maxiter = 500, eps = 1E-4):
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Syndrome Decoding</h3>
 									<p>It decodes code in fininte field using the code's syndrome. To avoid confusion, the <b>'code'</b> here is not the <b><i>coding</i></b> code, but the <b><i>encoding-decoding-related</i></b> code (in which it is numbers). Here's a function for generating syndrome look-up table for the cosets from basis <code>H</code> in the Galois field <code>ffield</code>.</p>
-									<pre><code>
-def generateLUT(H, ffield):
+									<pre><code class="language-python">def generateLUT(H, ffield):
     n = len(H[0])
     n_k = len(H)
     cLeader = np.array([0 for i in range(n)])
@@ -152,8 +145,7 @@ cLeaders, synd = generateLUT(dualBase(C, GF), GF)
 
 print("coset leader | syndrome")
 for i in range(len(synd)):
-    print(cLeaders[i], " | ", synd[i])
-									</code></pre>
+    print(cLeaders[i], " | ", synd[i])</code></pre>
 									<p>I made an .exe file for this project, you can try to make an executable too using the <code>setup.py</code>. However, there's a python notebook file for a better view of the project.</p>
 									<a href="https://github.com/soniaagst/coding-theory/tree/main/syndrome-decoding" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
@@ -164,8 +156,7 @@ for i in range(len(synd)):
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Nonlinear Codes</h3>
 									<p>It generates different types of nonlinear code, such as Preparata code and Nordstrom-Robinson code. This is for generating the Preparata code of oder <code>m</code>.</p>
-									<pre><code>
-def preparata(m):
+									<pre><code class="language-python">def preparata(m):
   n2 = 2**(2*m - 1)
 
   # himpunan vektor u dan v
@@ -203,8 +194,7 @@ def preparata(m):
 
             p = np.concatenate((U[i],  V[j]))
             P.append(p)
-  return P
-									</code></pre>
+  return P</code></pre>
 									<a href="https://github.com/soniaagst/coding-theory/blob/main/nonlinear-codes.ipynb" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
 								</section>
 								
@@ -217,77 +207,61 @@ def preparata(m):
 								<h2 class="major">Gallery</h2>
 								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
 								<p><br/><b>PLEASE DO NOT STEAL!</b><br />Click at any image to take a closer look. Click again to close.</p>
-								<p>In the last autumn, I submitted some kind of coins for a contest in a really amazing Japanese learning site I use, <a href="https://www.renshuu.org/" target="_blank"><i>renshuu.org</i></a>. The coins used for a gacha system in that site. I'll show them first at the top row because they're so cute, followed by another lovely drawings. <i class="icon solid fa-paw"></i></p>
+								<p>In the last autumn, I submitted some kind of coins for a contest in a really amazing Japanese learning site I use, <a href="https://www.renshuu.org/" target="_blank"><i>renshuu.org</i></a>. <i>They would be cooler if you know the references!</i> I'll show them first at the top row because they're so cute, followed by another lovely drawings. <i class="icon solid fa-paw"></i></p>
 								
 								<div class="gallery">
 									<img src="images/coin-acuteagawa-thumbnail.png" alt="Acutagawa" onclick="openModal('images/coin-acuteagawa.png')">
 									<img src="images/coin-hokuto-thumbnail.png" alt="The Big Dipper (Great Bear)" onclick="openModal('images/coin-hokuto.png')">
 									<img src="images/coin-maou-thumbnail.png" alt="The Devil Dance" onclick="openModal('images/coin-maou.png')">
-									<img src="images/syafiq-colored-thumbnail.png" alt="" onclick="openModal('images/syafiq-colored.png')">
+									<img src="images/img08-thumbnail.png" alt="Syafiq" onclick="openModal('images/img08.png')">
 									<img src="images/logo-gnu.png" alt="GNU" onclick="openModal('images/logo-gnu.png')">
 									<img src="images/twilight-thumbnail.jpg" alt="Twilight" onclick="openModal('images/twilight.jpg')">
 								</div>
 
 								<p><br/>That cute little blue elephant is actually a logo for a merch-selling entity I founded for my organization's fundraising at uni. Move on.<br />This big painting below is my favorite. <i class="icon regular fa-star"></i> Painted with watercolor on paper, it's a scene in an anime called <i>Hakkenden</i>. It's so beautiful I'm obsessed. But, something is missing. <i>Can you guess what that is?</i></p>
-								<div class="gallery"><img src="images/hakkenden21.jpg" alt="" onclick="openModal('images/hakkenden.jpg')" ></div>
+								<div class="gallery"><img src="images/img09-thumbnail.jpg" alt="" onclick="openModal('images/img09.jpg')" ></div>
 
-								<p><br/>I don't know but I really love drawing eyes so much, and I actually have a collection of eyes I doodled on Google Keep on my phone's little screen. Yes, I was inspired by the 4 elements in <i>Avatar the Legend of Aang</i>. An addition, a turquoise eye I painted (doodled) with watercolor on a little piece of paper. And some other Keep notes doodles. <i class="icon solid fa-fan"></i></p>
-								<div class="shelf auto-slide">
-									<div class="shelf-item"><img src="images/Forest-thumbnail.png" alt="ATLA" onclick="openModal('images/Forest.png')"></div>
-									<div class="shelf-item"><img src="images/Storm-thumbnail.png" alt="ATLA" onclick="openModal('images/Storm.png')"></div>
-									<div class="shelf-item"><img src="images/Volcano-thumbnail.png" alt="ATLA" onclick="openModal('images/Volcano.png')"></div>
-									<div class="shelf-item"><img src="images/Glacier-thumbnail.png" alt="ATLA" onclick="openModal('images/Glacier.png')"></div>
-									<div class="shelf-item"><img src="images/topazeye-thumbnail.jpg" alt="topaz" onclick="openModal('images/topazeye.jpg')"></div>
-									<div class="shelf-item"><img src="images/juice-thumbnail.jpg" alt="Orange Juice" onclick="openModal('images/juice.jpg')"></div>
-									<div class="shelf-item"><img src="images/sakura-thumbnail.jpg" alt="Sakura" onclick="openModal('images/sakura.jpg')"></div>
+								<p><br/>I don't know but I really love drawing eyes so much, and I actually have a collection of eyes I doodled on Google Keep on my phone's little screen. And yes, These are inspired by the 4 elements in <i>Avatar the Legend of Aang</i>. An addition, a turquoise eye (watercolor on a little piece of paper). And some other Keep notes doodles. <i class="icon solid fa-fan"></i></p>
+								<div class="shelf-gallery">
+									<div class="shelf auto-slide">
+										<div class="shelf-item"><img src="images/eyeForest-thumbnail.png" alt="Forest Elf" onclick="openModal('images/eyeForest.png')"></div>
+										<div class="shelf-item"><img src="images/eyeStorm-thumbnail.png" alt="Eye of the Storm" onclick="openModal('images/eyeStorm.png')"></div>
+										<div class="shelf-item"><img src="images/eyeVolcano-thumbnail.png" alt="Volcano Dragon" onclick="openModal('images/eyeVolcano.png')"></div>
+										<div class="shelf-item"><img src="images/eyeGlacier-thumbnail.png" alt="Glacier Girl" onclick="openModal('images/eyeGlacier.png')"></div>
+										<div class="shelf-item"><img src="images/img01-thumbnail.jpg" alt="Turquoise" onclick="openModal('images/img01.jpg')"></div>
+										<div class="shelf-item"><img src="images/img02-thumbnail.jpg" alt="Orange Juice" onclick="openModal('images/img02.jpg')"></div>
+										<div class="shelf-item"><img src="images/img03-thumbnail.jpg" alt="Sakura" onclick="openModal('images/img03.jpg')"></div>
+									</div>
 								</div>
 
 								<p><br/>And some abstracts. These are not necessarily good, but the colors are nice in my opinion. <i>Try to find my name in the first image!</i> <i class="icon solid fa-palette"></i></p>
 								<div class="shelf">
-									<div class="shelf-item"><img src="images/mirror-thumbnail.jpg" alt="" onclick="openModal('images/mirror.jpg')"></div>
-									<div class="shelf-item"><img src="images/abstract01-thumbnail.jpg" alt="" onclick="openModal('images/abstract01.jpg')"></div>
-									<div class="shelf-item"><img src="images/abstract02-thumbnail.jpg" alt="" onclick="openModal('images/abstract02.jpg')"></div>
-									<div class="shelf-item"><img src="images/disintegrated_circuit-thumbnail.jpg" alt="" onclick="openModal('images/disintegrated_circuit.jpg')"></div>
+									<div class="shelf-item"><img src="images/img04-thumbnail.jpg" alt="Mirror" onclick="openModal('images/img04.jpg')"></div>
+									<div class="shelf-item"><img src="images/img05-thumbnail.jpg" alt="Sun" onclick="openModal('images/img05.jpg')"></div>
+									<div class="shelf-item"><img src="images/img06-thumbnail.jpg" alt="Castle" onclick="openModal('images/img06.jpg')"></div>
+									<div class="shelf-item"><img src="images/img07-thumbnail.jpg" alt="Disintegrated Circuit" onclick="openModal('images/img07.jpg')"></div>
 								</div>
 
-								<p><br/>I sketch a lot when bored in class. But, most of the sketches below are gifts for a friend or family on their birthday (gifts are not drawn in class, of course). <i class="icon solid fa-pen"></i></p>
-								<div class="shelf auto-slide">
-									<div class="shelf-item">
-										<img src="images/sketch-whale.jpg" alt="Whale" onclick="openModal('images/sketch-whale.jpg')">
-									</div>
-									<div class="shelf-item">
-										<img src="images/sketch-kirizan.jpg" alt="Kirizan" onclick="openModal('images/sketch-kirizan.jpg')">
-									</div>
-									<div class="shelf-item">
-										<img src="images/sketch-rk.jpg" alt="" onclick="openModal('images/sketch-rk.jpg')">
-									</div>
-									<div class="shelf-item">
-										<img src="images/sketch-mw.jpg" alt="" onclick="openModal('images/sketch-mw.jpg')">
-									</div>
-									<div class="shelf-item">
-										<img src="images/syafiq-sketch-thumbnail.jpg" alt="" onclick="openModal('images/syafiq-sketch.jpg')">
-									</div>
-									<div class="shelf-item">
-										<img src="images/sketch-iori.jpg" alt="Iori" onclick="openModal('images/sketch-iori.jpg')">
-									</div>
-									<div class="shelf-item">
-										<img src="images/sketch-rn.jpg" alt="" onclick="openModal('images/sketch-rn.jpg')">
-									</div>
-									<div class="shelf-item">
-										<img src="images/sketch-ye.jpg" alt="" onclick="openModal('images/sketch-ye.jpg')">
-									</div>
-									<div class="shelf-item">
-										<img src="images/sketch-hn.jpg" alt="" onclick="openModal('images/sketch-hn.jpg')">
-									</div>
-									<div class="shelf-item">
-										<img src="images/oneshot.jpg" alt="" onclick="openModal('images/oneshot.jpg')">
+								<p><br/>I sketch a lot when bored in class. Most of the sketches below are gifts for a friend or family on their birthday (gifts are not drawn in class, of course). Up to this point, the page is colorful, now is the time for the black-and-whites. <i class="icon solid fa-pen"></i></p>
+								<div class="shelf-gallery">
+									<div class="shelf auto-slide">
+										<div class="shelf-item"><img src="images/sketch01.jpg" alt="Majestic Whale" onclick="openModal('images/sketch01.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch02.jpg" alt="Kirizan" onclick="openModal('images/sketch02.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch03.jpg" alt="" onclick="openModal('images/sketch03.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch04.jpg" alt="" onclick="openModal('images/sketch04.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch05-thumbnail.jpg" alt="" onclick="openModal('images/sketch05.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch06.jpg" alt="" onclick="openModal('images/sketch06.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch07.jpg" alt="" onclick="openModal('images/sketch07.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch08.jpg" alt="Iori" onclick="openModal('images/sketch08.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch09.jpg" alt="" onclick="openModal('images/sketch09.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch10.jpg" alt="" onclick="openModal('images/sketch10.jpg')"></div>
 									</div>
 								</div>
 
 								<p><br/>That SpongeBob comic one at the last was definitely drawn in the spirit of meme. Anyway, let's take a look at photographs of flowers and moon, because, why not. Indeed they're not drawings, but are so cool that I tempted to show off! The moon was photographed from the lens of a telescope when I was observing at <a href="https://www.instagram.com/imahnoong/" target="_blank"><i>Imah Noong</i></a> observatory and planetarium in Lembang, Bandung. <i class="icon solid fa-camera-retro"></i></p>
 								<div class="gallery">
 									<img src="images/flower-yellow.jpg" alt="" onclick="openModal('images/flower-yellow.jpg')">
-									<img src="images/imah-noong-thumbnail.jpg" alt="imah-noong" onclick="openModal('images/imah-noong.jpg')">
+									<img src="images/img10-thumbnail.jpg" alt="imah-noong" onclick="openModal('images/img10.jpg')">
 									<img src="images/flower-blue.jpg" alt="" onclick="openModal('images/flower-blue.jpg')">
 								</div>
 
@@ -295,7 +269,9 @@ def preparata(m):
 								
 								<!-- Pop-up Modal -->
 								<div id="popup-modal" class="modal">
+									<span class="prev" onclick="navigateImage(-1)">&#10094;</span>
 									<img id="popup-image" class="modal-content" src="" alt="">
+									<span class="next" onclick="navigateImage(1)">&#10095;</span>
 									<span class="close" onclick="closeModal()">&times;</span>
 								</div>
 								
@@ -714,6 +690,10 @@ def preparata(m):
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/an-old-hope.min.css">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+			<script>hljs.highlightAll();</script>
 
 	</body>
 </html>

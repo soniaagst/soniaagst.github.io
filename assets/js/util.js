@@ -606,55 +606,129 @@ document.querySelectorAll('.flipquote').forEach(flipquote => {
   });
 });
 
-function openModal(imageSrc) {
+let currentImageIndex = 0; // Track the current image index
+const galleryImages = document.querySelectorAll('.gallery img, .shelf-item img'); // Select all images in the gallery
+
+function openModal(imageSrc, index) {
   const modal = document.getElementById('popup-modal');
   const modalImg = document.getElementById('popup-image');
 
+  currentImageIndex = index; // Update the current image index
   modalImg.src = imageSrc; // Set the image source
 
-	// Dynamically position the popup based on the clicked image
+  // Display the modal
 	modal.style.top = `${window.scrollY + 320}px`;
 	modal.style.left = `50%`;
-	modal.style.display = 'flex'; // Show the modal
+  modal.style.display = 'flex';
 
-  // Close the modal when clicking inside the image
-  modal.onclick = () => closeModal();
+	addSwipeListeners(modal);
+
+	// Close the modal when clicking inside the image
+  modalImg.onclick = () => closeModal();
 }
 
 function closeModal() {
   const modal = document.getElementById('popup-modal');
   modal.style.display = 'none'; // Hide the modal
+	removeSwipeListeners(modal);
 }
 
-function autoSlideShelves() {
-  const autoShelves = document.querySelectorAll('.shelf.auto-slide');
+function navigateImage(direction) {
+  currentImageIndex += direction; // Move to the next or previous image
 
-  autoShelves.forEach((shelf) => {
-    let scrollAmount = 0;
-    let slideTimer;
+  // Wrap around the gallery
+  if (currentImageIndex < 0) {
+    currentImageIndex = galleryImages.length - 1;
+  } else if (currentImageIndex >= galleryImages.length) {
+    currentImageIndex = 0;
+  }
 
-    const startSliding = () => {
-      slideTimer = setInterval(() => {
-        shelf.scrollLeft += 1; // Move 1px to the right
-        scrollAmount += 1;
+	// Replace the thumbnail src with full-sized src
+	const thumbnailSrc = galleryImages[currentImageIndex].getAttribute('src');
+	const imageSrc = thumbnailSrc.replace('-thumbnail', '');
 
-        if (scrollAmount >= shelf.scrollWidth - shelf.clientWidth) {
-          scrollAmount = 0; // Reset to the start
-          shelf.scrollLeft = 0;
-        }
-      }, 20); // Use custom speed or default to 20ms
-    };
+  const modalImg = document.getElementById('popup-image');
+  modalImg.src = imageSrc; // Update the image source
+}
 
-    const stopSliding = () => clearInterval(slideTimer);
+// Attach click event to all gallery thumbnails
+galleryImages.forEach((image, index) => {
+  image.addEventListener('click', () => {
+    // Replace '-thumbnail' with '' to derive the full-sized image path
+    const fullImageSrc = image.getAttribute('src').replace('-thumbnail', ''); 
+    openModal(fullImageSrc, index);
+  });
+});
 
-    // Start sliding when the page loads
-    startSliding();
+// Add navigation functionality for keyboard
+document.addEventListener('keydown', (event) => {
+  const modal = document.getElementById('popup-modal');
+  if (modal.style.display === 'flex') {
+    if (event.key === 'ArrowLeft') navigateImage(-1); // Left arrow for previous
+    if (event.key === 'ArrowRight') navigateImage(1); // Right arrow for next
+    if (event.key === 'Escape') closeModal(); // Escape to close modal
+  }
+});
 
-    // Pause on hover
-    shelf.addEventListener('mouseenter', stopSliding);
-    shelf.addEventListener('mouseleave', startSliding);
+// Add Event Listeners for Swipe
+function addSwipeListeners(modal) {
+  let startX = 0;
+
+  modal.addEventListener('touchstart', (event) => {
+    startX = event.touches[0].clientX;
+  });
+
+  modal.addEventListener('touchend', (event) => {
+    const endX = event.changedTouches[0].clientX;
+    const diffX = startX - endX;
+
+    if (diffX > 50) {
+      navigateImage(1); // Swipe left for next
+    } else if (diffX < -50) {
+      navigateImage(-1); // Swipe right for previous
+    }
   });
 }
 
-// Call the function
-autoSlideShelves();
+// Remove Swipe Event Listeners
+function removeSwipeListeners(modal) {
+  modal.replaceWith(modal.cloneNode(true)); // Remove all event listeners by cloning
+}
+
+let slideTimer = setInterval(() => slideShelves(), 2000); // Adjust interval as needed
+let userInteracting = false;
+
+// Auto-slide with infinite scrolling
+function slideShelves() {
+  if (!userInteracting) {
+    const autoShelves = document.querySelectorAll('.shelf.auto-slide');
+    autoShelves.forEach((shelf) => {
+      const maxScrollLeft = 0.9*shelf.scrollWidth - shelf.clientWidth; // Wtf. I don't know why, but it works.
+      shelf.scrollBy({ left: 200, behavior: 'smooth' }); // Scroll distance
+
+      // Reset to start if reaching the end
+      if (shelf.scrollLeft >= maxScrollLeft) {
+        shelf.scrollLeft = 0; // Seamlessly reset to start
+      }
+    });
+  }
+}
+
+function pauseAutoSlide() {
+  userInteracting = true;
+  clearInterval(slideTimer);
+}
+
+function resumeAutoSlide() {
+  userInteracting = false;
+  slideTimer = setInterval(() => slideShelves(), 2000);
+}
+
+document.querySelectorAll('.shelf').forEach((shelf) => {
+  shelf.addEventListener('mousedown', pauseAutoSlide);
+  shelf.addEventListener('mouseup', resumeAutoSlide);
+  shelf.addEventListener('mouseenter', pauseAutoSlide);
+  shelf.addEventListener('mouseleave', resumeAutoSlide);
+  shelf.addEventListener('touchstart', pauseAutoSlide);
+  shelf.addEventListener('touchend', resumeAutoSlide);
+});
