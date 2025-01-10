@@ -671,28 +671,37 @@ document.addEventListener('keydown', (event) => {
 });
 
 // Add Event Listeners for Swipe
+let startX = 0; // Track touch start position
+
 function addSwipeListeners(modal) {
-  let startX = 0;
+  modal.addEventListener('touchstart', handleTouchStart);
+  modal.addEventListener('touchend', handleTouchEnd);
+}
 
-  modal.addEventListener('touchstart', (event) => {
-    startX = event.touches[0].clientX;
-  });
+function removeSwipeListeners(modal) {
+  modal.removeEventListener('touchstart', handleTouchStart);
+  modal.removeEventListener('touchend', handleTouchEnd);
+}
 
-  modal.addEventListener('touchend', (event) => {
-    const endX = event.changedTouches[0].clientX;
-    const diffX = startX - endX;
+function handleTouchStart(event) {
+  startX = event.touches[0].clientX; // Get the initial touch position
+}
 
-    if (diffX > 50) {
-      navigateImage(1); // Swipe left for next
-    } else if (diffX < -50) {
-      navigateImage(-1); // Swipe right for previous
-    }
-  });
+function handleTouchEnd(event) {
+  const endX = event.changedTouches[0].clientX;
+  const diffX = startX - endX;
+
+  if (diffX > 100) {
+    navigateImage(1); // Swipe left for next
+  } else if (diffX < -100) {
+    navigateImage(-1); // Swipe right for previous
+  }
 }
 
 // Remove Swipe Event Listeners
 function removeSwipeListeners(modal) {
-  modal.replaceWith(modal.cloneNode(true)); // Remove all event listeners by cloning
+  modal.removeEventListener("touchstart", handleTouchStart);
+  modal.removeEventListener("touchmove", handleTouchMove);
 }
 
 let slideTimer = setInterval(() => slideShelves(), 2500); // Adjust interval as needed
@@ -703,7 +712,7 @@ function slideShelves() {
   if (!userInteracting) {
     const autoShelves = document.querySelectorAll('.shelf.auto-slide');
     autoShelves.forEach((shelf) => {
-      const maxScrollLeft = shelf.scrollWidth - shelf.clientWidth; // Wtf. I don't know why, but it works.
+      const maxScrollLeft = shelf.scrollWidth - shelf.clientWidth; // // Total scrollable width. Wtf. I don't know why, but it works.
       shelf.scrollBy({ left: 200, behavior: 'smooth' }); // Scroll distance
 
       // Reset to start if reaching the end
