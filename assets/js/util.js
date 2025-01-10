@@ -695,7 +695,7 @@ function removeSwipeListeners(modal) {
   modal.replaceWith(modal.cloneNode(true)); // Remove all event listeners by cloning
 }
 
-let slideTimer = setInterval(() => slideShelves(), 2000); // Adjust interval as needed
+let slideTimer = setInterval(() => slideShelves(), 2500); // Adjust interval as needed
 let userInteracting = false;
 
 // Auto-slide with infinite scrolling
@@ -703,7 +703,7 @@ function slideShelves() {
   if (!userInteracting) {
     const autoShelves = document.querySelectorAll('.shelf.auto-slide');
     autoShelves.forEach((shelf) => {
-      const maxScrollLeft = 0.9*shelf.scrollWidth - shelf.clientWidth; // Wtf. I don't know why, but it works.
+      const maxScrollLeft = shelf.scrollWidth - shelf.clientWidth; // Wtf. I don't know why, but it works.
       shelf.scrollBy({ left: 200, behavior: 'smooth' }); // Scroll distance
 
       // Reset to start if reaching the end
@@ -721,7 +721,7 @@ function pauseAutoSlide() {
 
 function resumeAutoSlide() {
   userInteracting = false;
-  slideTimer = setInterval(() => slideShelves(), 2000);
+  slideTimer = setInterval(() => slideShelves(), 2500);
 }
 
 document.querySelectorAll('.shelf').forEach((shelf) => {

@@ -53,7 +53,7 @@
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Tutor Optimization and Scheduling using ILP</h3>
-									<p>It minimizes the number of tutor needed in cram school when recruiting tutors, and make a learning schedule for classes based on the minimum number of tutors, using Integer Linear Programming. This is one of the constraints in the scheduling problem.</p>
+									<p>It minimizes the number of tutor needed in cram school when recruiting tutors, and make a learning schedule for classes based on the minimum number of tutors, using Integer Linear Programming. The basic structure of modelling optimization problems are: the variables to be determined, the objective function, and the constraints. This is one of the constraints in this scheduling problem.</p>
 									<pre><code class="language-python"># kendala3: setiap kelas tidak boleh masuk 2 hari berurutan
 for c in range(nc):
   for k in range(nk[c]):
@@ -67,7 +67,7 @@ for c in range(nc):
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Vigenere Cipher: Encryption and Cryptanalysis</h3>
-									<p>It encrypts and do cryptanalysis to a given Sundanese text utilizing Vigenere cipher. Here's a function for counting the coincidence values for each row in the ciphertext matrix, <code>x</code> is the row.</p>
+									<p>It encrypts and do cryptanalysis to a given Sundanese text utilizing Vigenere cipher. One step of the cryptanalysis process is to count the coincidence values for each row in the ciphertext matrix. Here's the function, <code>x</code> is the row.</p>
 									<pre><code class="language-python"># Fungsi untuk menghitung nilai koinsiden untuk setiap baris pada matriks
 def countings (x):
   count_table = {} # Variabel yg menyimpan kemunculan huruf
@@ -116,7 +116,7 @@ def countings (x):
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Syndrome Decoding</h3>
-									<p>It decodes code in fininte field using the code's syndrome. To avoid confusion, the <b>'code'</b> here is not the <b><i>coding</i></b> code, but the <b><i>encoding-decoding-related</i></b> code (in which it is numbers). Here's a function for generating syndrome look-up table for the cosets from basis <code>H</code> in the Galois field <code>ffield</code>.</p>
+									<p>It decodes code in fininte field using the code's syndrome. To avoid confusion, the <b>'code'</b> here is not the <b><i>coding</i></b> code, but the <b><i>encoding-decoding-related</i></b> code (in which it is numbers). To be able to use the syndrome, we need to find the syndrome of the code. And this function is for generating syndrome look-up table for the cosets from basis <code>H</code> in the Galois field <code>ffield</code>.</p>
 									<pre><code class="language-python">def generateLUT(H, ffield):
     n = len(H[0])
     n_k = len(H)
@@ -155,7 +155,7 @@ for i in range(len(synd)):
 								<section>
 									<i class="icon solid fa-code"></i>
 									<h3>Coding Theory: Nonlinear Codes</h3>
-									<p>It generates different types of nonlinear code, such as Preparata code and Nordstrom-Robinson code. This is for generating the Preparata code of oder <code>m</code>.</p>
+									<p>It generates different types of nonlinear code, such as Preparata code and Nordstrom-Robinson code. For example, generating Preparata code of oder <code>m</code> would look like this.</p>
 									<pre><code class="language-python">def preparata(m):
   n2 = 2**(2*m - 1)
 
@@ -247,11 +247,11 @@ for i in range(len(synd)):
 									<div class="shelf auto-slide">
 										<div class="shelf-item"><img src="images/sketch01.jpg" alt="Majestic Whale" onclick="openModal('images/sketch01.jpg')"></div>
 										<div class="shelf-item"><img src="images/sketch02.jpg" alt="Kirizan" onclick="openModal('images/sketch02.jpg')"></div>
-										<div class="shelf-item"><img src="images/sketch03.jpg" alt="" onclick="openModal('images/sketch03.jpg')"></div>
-										<div class="shelf-item"><img src="images/sketch04.jpg" alt="" onclick="openModal('images/sketch04.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch03-thumbnail.png" alt="" onclick="openModal('images/sketch03.png')"></div>
+										<div class="shelf-item"><img src="images/sketch04-thumbnail.png" alt="" onclick="openModal('images/sketch04.png')"></div>
 										<div class="shelf-item"><img src="images/sketch05-thumbnail.jpg" alt="" onclick="openModal('images/sketch05.jpg')"></div>
 										<div class="shelf-item"><img src="images/sketch06.jpg" alt="" onclick="openModal('images/sketch06.jpg')"></div>
-										<div class="shelf-item"><img src="images/sketch07.jpg" alt="" onclick="openModal('images/sketch07.jpg')"></div>
+										<div class="shelf-item"><img src="images/sketch07-thumbnail.png" alt="" onclick="openModal('images/sketch07.png')"></div>
 										<div class="shelf-item"><img src="images/sketch08.jpg" alt="Iori" onclick="openModal('images/sketch08.jpg')"></div>
 										<div class="shelf-item"><img src="images/sketch09.jpg" alt="" onclick="openModal('images/sketch09.jpg')"></div>
 										<div class="shelf-item"><img src="images/sketch10.jpg" alt="" onclick="openModal('images/sketch10.jpg')"></div>
@@ -269,9 +269,9 @@ for i in range(len(synd)):
 								
 								<!-- Pop-up Modal -->
 								<div id="popup-modal" class="modal">
-									<span class="prev" onclick="navigateImage(-1)">&#10094;</span>
+									<span class="prev" onclick="navigateImage(-1)">〈　　　</span>
 									<img id="popup-image" class="modal-content" src="" alt="">
-									<span class="next" onclick="navigateImage(1)">&#10095;</span>
+									<span class="next" onclick="navigateImage(1)">　　　〉</span>
 									<span class="close" onclick="closeModal()">&times;</span>
 								</div>
 								
