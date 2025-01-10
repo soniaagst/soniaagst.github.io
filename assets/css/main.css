@@ -1770,6 +1770,7 @@ input, select, textarea {
 		z-index: 1000;
 		top: 50%;
 		left: 50%;
+		height: 95vh;
 		width: 95vw;
 		background-color: rgba(27, 31, 34, 0.5); /* Semi-transparent background */
 		justify-content: center;
