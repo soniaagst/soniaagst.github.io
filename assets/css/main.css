@@ -1290,18 +1290,6 @@ input, select, textarea {
 				display: none;
 			}
 
-		#header .logo {
-			width: 5.5rem;
-			height: 5.5rem;
-			line-height: 5.5rem;
-			border: solid 1px #ffffff;
-			border-radius: 100%;
-		}
-
-			#header .logo .icon:before {
-				font-size: 2rem;
-			}
-
 		#header .content {
 			border-style: solid;
 			border-color: #ffffff;
@@ -1438,16 +1426,6 @@ input, select, textarea {
 				#header > *:before {
 					top: calc(-2rem - 1px);
 					height: calc(2rem + 1px);
-				}
-
-			#header .logo {
-				width: 4.75rem;
-				height: 4.75rem;
-				line-height: 4.75rem;
-			}
-
-				#header .logo .icon:before {
-					font-size: 1.75rem;
 				}
 
 			#header .content .inner {
@@ -1876,4 +1854,48 @@ input, select, textarea {
 		margin-top: 5px;
 		font-size: 14px;
 		color: #b9bbbd;
+	}
+
+	.button-round {
+		width: 5.5rem;
+		height: 5.5rem;
+		line-height: 5.5rem;
+		background-color: transparent;
+		border: 1px solid #ffffff;
+		border-radius: 50%; /* Circle magic! */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 2rem; /* Icon size */
+		color: #ffffff; /* Icon color */
+		text-align: center;
+		cursor: pointer;
+		transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+	}
+	
+	.button-round:hover {
+		background-color: rgba(255, 255, 255, 0.05);
+		transform: scale(1.02);
+	}
+	
+	.button-round:active {
+		background-color: rgba(255, 255, 255, 0.1);
+		transform: scale(0.98);
+	}
+
+	@media screen and (max-width: 480px) {
+
+		.button-round {
+			width: 4.75rem;
+			height: 4.75rem;
+			line-height: 4.75rem;
+		}
+
+		.button-round .icon:before {
+			font-size: 1.75rem;
+		}
+	}
+
+	.no-underline {
+		border-bottom: none;
 	}

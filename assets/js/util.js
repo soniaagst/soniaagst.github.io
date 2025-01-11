@@ -671,43 +671,46 @@ document.addEventListener('keydown', (event) => {
 });
 
 // Add Event Listeners for Swipe
-let startX = 0; // Track touch start position
-
 function addSwipeListeners(modal) {
-  modal.addEventListener('touchstart', handleTouchStart);
-  modal.addEventListener('touchend', handleTouchEnd);
+  let startX = 0;
+  let currentX = 0;
+  let isSwiping = false;
+
+  const modalImg = document.getElementById('popup-image');
+
+  modal.addEventListener('touchstart', (event) => {
+    startX = event.touches[0].clientX;
+    isSwiping = true;
+    modalImg.style.transition = 'none'; // Disable smooth animation during drag
+  });
+
+  modal.addEventListener('touchmove', (event) => {
+    if (!isSwiping) return;
+    currentX = event.touches[0].clientX;
+    const diffX = currentX - startX;
+    modalImg.style.transform = `translateX(${diffX}px)`; // Drag image
+  });
+
+  modal.addEventListener('touchend', () => {
+    if (!isSwiping) return;
+    const diffX = currentX - startX;
+    isSwiping = false;
+
+    if (Math.abs(diffX) > 75) {
+      const direction = diffX > 0 ? -1 : 1; // Swipe direction: left or right
+      navigateImage(direction);
+    }
+
+    // Smoothly reset position if no swipe occurred
+    modalImg.style.transition = 'transform 0.3s ease'; // Smooth return
+    modalImg.style.transform = 'translateX(0)'; // Reset position
+  });
 }
 
-function removeSwipeListeners(modal) {
-  modal.removeEventListener('touchstart', handleTouchStart);
-  modal.removeEventListener('touchend', handleTouchEnd);
-}
-
-function handleTouchStart(event) {
-  startX = event.touches[0].clientX; // Get the initial touch position
-}
-
-function handleTouchEnd(event) {
-  const endX = event.changedTouches[0].clientX;
-  const diffX = startX - endX;
-
-  if (diffX > 100) {
-    navigateImage(1); // Swipe left for next
-  } else if (diffX < -100) {
-    navigateImage(-1); // Swipe right for previous
-  }
-}
-
-// Remove Swipe Event Listeners
-function removeSwipeListeners(modal) {
-  modal.removeEventListener("touchstart", handleTouchStart);
-  modal.removeEventListener("touchmove", handleTouchMove);
-}
-
+// Auto-slide with infinite scrolling
 let slideTimer = setInterval(() => slideShelves(), 2500); // Adjust interval as needed
 let userInteracting = false;
 
-// Auto-slide with infinite scrolling
 function slideShelves() {
   if (!userInteracting) {
     const autoShelves = document.querySelectorAll('.shelf.auto-slide');
