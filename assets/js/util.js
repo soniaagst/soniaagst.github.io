@@ -630,7 +630,6 @@ function openModal(imageSrc, index) {
 function closeModal() {
   const modal = document.getElementById('popup-modal');
   modal.style.display = 'none'; // Hide the modal
-	removeSwipeListeners(modal);
 }
 
 function navigateImage(direction) {
@@ -673,44 +672,56 @@ document.addEventListener('keydown', (event) => {
 // Add Event Listeners for Swipe
 function addSwipeListeners(modal) {
   let startX = 0;
-  let isSwiping = false;
-
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let isDragging = false;
   const modalImg = document.getElementById('popup-image');
+  const images = document.querySelectorAll('.gallery img'); // Assuming images have a common class
+  let currentIndex = 0;
 
   modal.addEventListener('touchstart', (event) => {
     startX = event.touches[0].clientX;
-    isSwiping = true;
-    modalImg.style.transition = 'none'; // Disable smooth animation during drag
+    isDragging = true;
+    modalImg.style.transition = 'none'; // Disable animation during swipe
   });
 
   modal.addEventListener('touchmove', (event) => {
-    if (!isSwiping) return;
+    if (!isDragging) return;
 
     const currentX = event.touches[0].clientX;
-    const diffX = currentX - startX;
+    currentTranslate = prevTranslate + (currentX - startX);
 
-    // Limit drag feedback to ±50px visually
-    modalImg.style.transform = `translateX(${Math.max(-50, Math.min(50, diffX))}px)`;
+    // Move the image container
+    modalImg.style.transform = `translateX(${currentTranslate}px)`;
   });
 
-  modal.addEventListener('touchend', (event) => {
-    if (!isSwiping) return;
+  modal.addEventListener('touchend', () => {
+    if (!isDragging) return;
 
-    const endX = event.changedTouches[0].clientX;
-    const diffX = endX - startX;
-    isSwiping = false;
+    isDragging = false;
+    const swipeDistance = currentTranslate - prevTranslate;
 
-    modalImg.style.transition = 'transform 0.3s ease'; // Restore transition
-    modalImg.style.transform = 'translateX(0)'; // Reset position
-
-    // Navigate only if swipe threshold is crossed
-    if (diffX > 75) {
-      navigateImage(-1); // Swipe right to previous image
-    } else if (diffX < -75) {
-      navigateImage(1); // Swipe left to next image
+    // Check if swipe distance crosses the threshold
+    if (swipeDistance < -50 && currentIndex < images.length - 1) {
+      currentIndex++;
+    } else if (swipeDistance > 50 && currentIndex > 0) {
+      currentIndex--;
     }
+
+    // Snap to the current image
+    updateTranslate();
+    modalImg.style.transition = 'transform 0.3s ease'; // Smooth transition back to position
   });
+
+  function updateTranslate() {
+    prevTranslate = -currentIndex * modal.offsetWidth;
+    modalImg.style.transform = `translateX(${prevTranslate}px)`;
+  }
+
+  // Initialize the correct image position
+  updateTranslate();
 }
+
 
 // Auto-slide with infinite scrolling
 let slideTimer = setInterval(() => slideShelves(), 2500); // Adjust interval as needed
