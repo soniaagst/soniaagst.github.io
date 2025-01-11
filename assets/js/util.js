@@ -673,7 +673,6 @@ document.addEventListener('keydown', (event) => {
 // Add Event Listeners for Swipe
 function addSwipeListeners(modal) {
   let startX = 0;
-  let currentX = 0;
   let isSwiping = false;
 
   const modalImg = document.getElementById('popup-image');
@@ -686,24 +685,30 @@ function addSwipeListeners(modal) {
 
   modal.addEventListener('touchmove', (event) => {
     if (!isSwiping) return;
-    currentX = event.touches[0].clientX;
+
+    const currentX = event.touches[0].clientX;
     const diffX = currentX - startX;
-    modalImg.style.transform = `translateX(${diffX}px)`; // Drag image
+
+    // Limit drag feedback to ±50px visually
+    modalImg.style.transform = `translateX(${Math.max(-50, Math.min(50, diffX))}px)`;
   });
 
-  modal.addEventListener('touchend', () => {
+  modal.addEventListener('touchend', (event) => {
     if (!isSwiping) return;
-    const diffX = currentX - startX;
+
+    const endX = event.changedTouches[0].clientX;
+    const diffX = endX - startX;
     isSwiping = false;
 
-    if (Math.abs(diffX) > 75) {
-      const direction = diffX > 0 ? -1 : 1; // Swipe direction: left or right
-      navigateImage(direction);
-    }
-
-    // Smoothly reset position if no swipe occurred
-    modalImg.style.transition = 'transform 0.3s ease'; // Smooth return
+    modalImg.style.transition = 'transform 0.3s ease'; // Restore transition
     modalImg.style.transform = 'translateX(0)'; // Reset position
+
+    // Navigate only if swipe threshold is crossed
+    if (diffX > 75) {
+      navigateImage(-1); // Swipe right to previous image
+    } else if (diffX < -75) {
+      navigateImage(1); // Swipe left to next image
+    }
   });
 }
 
