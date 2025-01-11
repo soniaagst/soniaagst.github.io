@@ -676,7 +676,7 @@ function addSwipeListeners(modal) {
   let prevTranslate = 0;
   let isDragging = false;
   const modalImg = document.getElementById('popup-image');
-  const images = document.querySelectorAll('.gallery img'); // Assuming images have a common class
+  const images = document.querySelectorAll('.gallery img, .shelf-item img'); // Assuming images have a common class
   let currentIndex = 0;
 
   modal.addEventListener('touchstart', (event) => {
