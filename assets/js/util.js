@@ -606,168 +606,108 @@ document.querySelectorAll('.flipquote').forEach(flipquote => {
   });
 });
 
-let currentImageIndex = 0; // Track the current image index
-const galleryImages = document.querySelectorAll('.gallery img, .shelf-item img'); // Select all images in the gallery
+let startX = 0;
+let currentX = 0;
+let isDragging = false;
+let currentTranslate = 0;
+let previousTranslate = 0;
+let currentIndex = 0;
+const galleryImages = Array.from(document.querySelectorAll('.gallery img, .shelf-item img'));
+const modal = document.getElementById('popup-modal');
+const modalImg = document.getElementById('popup-image');
 
 function openModal(imageSrc, index) {
-  const modal = document.getElementById('popup-modal');
-  const modalImg = document.getElementById('popup-image');
+  currentIndex = index; // Update index for current image
+  modalImg.src = imageSrc; // Set modal image source
 
-  currentImageIndex = index; // Update the current image index
-  modalImg.src = imageSrc; // Set the image source
+  modal.style.top = `${window.scrollY + 320}px`;
+  modal.style.left = `50%`;
+  modal.style.display = 'flex'; // Show modal
 
-  // Display the modal
-	modal.style.top = `${window.scrollY + 320}px`;
-	modal.style.left = `50%`;
-  modal.style.display = 'flex';
-
-	addSwipeListeners(modal);
-
-	// Close the modal when clicking inside the image
-  modalImg.onclick = () => closeModal();
+  addSwipeListeners(); // Add swipe functionality
 }
 
 function closeModal() {
-  const modal = document.getElementById('popup-modal');
-  modal.style.display = 'none'; // Hide the modal
+  modal.style.display = 'none'; // Hide modal
+  removeSwipeListeners(); // Remove swipe functionality
 }
 
 function navigateImage(direction) {
-  currentImageIndex += direction; // Move to the next or previous image
-
-  // Wrap around the gallery
-  if (currentImageIndex < 0) {
-    currentImageIndex = galleryImages.length - 1;
-  } else if (currentImageIndex >= galleryImages.length) {
-    currentImageIndex = 0;
+  currentIndex += direction;
+  if (currentIndex < 0) {
+    currentIndex = galleryImages.length - 1; // Wrap to last image
+  } else if (currentIndex >= galleryImages.length) {
+    currentIndex = 0; // Wrap to first image
   }
 
-	// Replace the thumbnail src with full-sized src
-	const thumbnailSrc = galleryImages[currentImageIndex].getAttribute('src');
-	const imageSrc = thumbnailSrc.replace('-thumbnail', '');
-
-  const modalImg = document.getElementById('popup-image');
-  modalImg.src = imageSrc; // Update the image source
+  updateModalImage();
 }
 
-// Attach click event to all gallery thumbnails
+function updateModalImage() {
+  const thumbnailSrc = galleryImages[currentIndex].getAttribute('src');
+  const imageSrc = thumbnailSrc.replace('-thumbnail', '');
+  modalImg.src = imageSrc;
+}
+
+function addSwipeListeners() {
+  modal.addEventListener('touchstart', handleTouchStart);
+  modal.addEventListener('touchmove', handleTouchMove);
+  modal.addEventListener('touchend', handleTouchEnd);
+}
+
+function removeSwipeListeners() {
+  modal.removeEventListener('touchstart', handleTouchStart);
+  modal.removeEventListener('touchmove', handleTouchMove);
+  modal.removeEventListener('touchend', handleTouchEnd);
+}
+
+function handleTouchStart(event) {
+  startX = event.touches[0].clientX;
+  isDragging = true;
+  modalImg.style.transition = 'none'; // Disable transition during drag
+}
+
+function handleTouchMove(event) {
+  if (!isDragging) return;
+
+  currentX = event.touches[0].clientX;
+  const diff = currentX - startX;
+
+  modalImg.style.transform = `translateX(${diff}px)`;
+}
+
+function handleTouchEnd() {
+  if (!isDragging) return;
+
+  isDragging = false;
+  modalImg.style.transition = 'transform 0.3s ease'; // Smooth transition
+  const diff = currentX - startX;
+
+  if (diff < -50 && currentIndex < galleryImages.length - 1) {
+    navigateImage(1); // Swipe left to next image
+  } else if (diff > 50 && currentIndex > 0) {
+    navigateImage(-1); // Swipe right to previous image
+  } else {
+    modalImg.style.transform = 'translateX(0)'; // Snap back to position
+  }
+}
+
+// Attach click event to gallery images
 galleryImages.forEach((image, index) => {
   image.addEventListener('click', () => {
-    // Replace '-thumbnail' with '' to derive the full-sized image path
-    const fullImageSrc = image.getAttribute('src').replace('-thumbnail', ''); 
+    const fullImageSrc = image.getAttribute('src').replace('-thumbnail', '');
     openModal(fullImageSrc, index);
   });
 });
 
-// Add navigation functionality for keyboard
+// Attach keyboard navigation for modal
 document.addEventListener('keydown', (event) => {
-  const modal = document.getElementById('popup-modal');
   if (modal.style.display === 'flex') {
-    if (event.key === 'ArrowLeft') navigateImage(-1); // Left arrow for previous
-    if (event.key === 'ArrowRight') navigateImage(1); // Right arrow for next
-    if (event.key === 'Escape') closeModal(); // Escape to close modal
+    if (event.key === 'ArrowLeft') navigateImage(-1);
+    if (event.key === 'ArrowRight') navigateImage(1);
+    if (event.key === 'Escape') closeModal();
   }
 });
-
-let currentIndex = 0; // 現在の画像インデックス
-const imageWrapper = document.querySelector('.image-wrapper');
-const images = imageWrapper.querySelectorAll('img');
-
-function updateWrapperPosition() {
-  const translateX = -currentIndex * 100; // 現在の画像の位置に移動
-  imageWrapper.style.transform = `translateX(${translateX}%)`;
-}
-
-function addSwipeListeners(modal) {
-  let startX = 0;
-  let isDragging = false;
-
-  modal.addEventListener('touchstart', (event) => {
-    startX = event.touches[0].clientX;
-    isDragging = true;
-    imageWrapper.style.transition = 'none'; // スムーズな戻りのため一時停止
-  });
-
-  modal.addEventListener('touchmove', (event) => {
-    if (!isDragging) return;
-    const currentX = event.touches[0].clientX;
-    const diff = currentX - startX;
-    imageWrapper.style.transform = `translateX(${-currentIndex * 100 + (diff / modal.offsetWidth) * 100}%)`;
-  });
-
-  modal.addEventListener('touchend', (event) => {
-    if (!isDragging) return;
-    isDragging = false;
-    imageWrapper.style.transition = 'transform 0.3s ease-in-out';
-
-    const endX = event.changedTouches[0].clientX;
-    const diff = endX - startX;
-
-    // スワイプ判定
-    if (diff < -50 && currentIndex < images.length - 1) {
-      currentIndex++;
-    } else if (diff > 50 && currentIndex > 0) {
-      currentIndex--;
-    }
-    updateWrapperPosition();
-  });
-}
-
-updateWrapperPosition(); // 初期化で正しい位置に移動
-
-// let startX = 0;
-// let currentTranslate = 0;
-// let prevTranslate = 0;
-// let isDragging = false;
-
-// // Add Event Listeners for Swipe
-// function addSwipeListeners(modal) {
-//   const modalImg = document.getElementById('popup-image');
-//   const images = document.querySelectorAll('.image-wrapper');
-//   let currentIndex = 0;
-
-//   modal.addEventListener('touchstart', (event) => {
-//     startX = event.touches[0].clientX;
-//     isDragging = true;
-//     modalImg.style.transition = 'none'; // Disable animation during swipe
-//   });
-
-//   modal.addEventListener('touchmove', (event) => {
-//     if (!isDragging) return;
-
-//     const currentX = event.touches[0].clientX;
-//     currentTranslate = prevTranslate + (currentX - startX);
-
-//     // Move the image container
-//     modalImg.style.transform = `translateX(${currentTranslate}px)`;
-//   });
-
-//   modal.addEventListener('touchend', () => {
-//     if (!isDragging) return;
-
-//     isDragging = false;
-//     const swipeDistance = currentTranslate - prevTranslate;
-
-//     // Check if swipe distance crosses the threshold
-//     if (swipeDistance < -50 && currentIndex < images.length - 1) {
-//       currentIndex++;
-//     } else if (swipeDistance > 50 && currentIndex > 0) {
-//       currentIndex--;
-//     }
-
-//     // Snap to the current image
-//     updateTranslate();
-//     modalImg.style.transition = 'transform 0.3s ease'; // Smooth transition back to position
-//   });
-
-//   function updateTranslate() {
-//     prevTranslate = -currentIndex * modal.offsetWidth;
-//     modalImg.style.transform = `translateX(${prevTranslate}px)`;
-//   }
-
-//   // Initialize the correct image position
-//   updateTranslate();
-// }
 
 // Auto-slide with infinite scrolling
 let slideTimer = setInterval(() => slideShelves(), 2500); // Adjust interval as needed
