@@ -669,59 +669,105 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-// Add Event Listeners for Swipe
+let currentIndex = 0; // 現在の画像インデックス
+const imageWrapper = document.querySelector('.image-wrapper');
+const images = imageWrapper.querySelectorAll('img');
+
+function updateWrapperPosition() {
+  const translateX = -currentIndex * 100; // 現在の画像の位置に移動
+  imageWrapper.style.transform = `translateX(${translateX}%)`;
+}
+
 function addSwipeListeners(modal) {
   let startX = 0;
-  let currentTranslate = 0;
-  let prevTranslate = 0;
   let isDragging = false;
-  const modalImg = document.getElementById('popup-image');
-  const images = document.querySelectorAll('.gallery img, .shelf-item img'); // Assuming images have a common class
-  let currentIndex = 0;
 
   modal.addEventListener('touchstart', (event) => {
     startX = event.touches[0].clientX;
     isDragging = true;
-    modalImg.style.transition = 'none'; // Disable animation during swipe
+    imageWrapper.style.transition = 'none'; // スムーズな戻りのため一時停止
   });
 
   modal.addEventListener('touchmove', (event) => {
     if (!isDragging) return;
-
     const currentX = event.touches[0].clientX;
-    currentTranslate = prevTranslate + (currentX - startX);
-
-    // Move the image container
-    modalImg.style.transform = `translateX(${currentTranslate}px)`;
+    const diff = currentX - startX;
+    imageWrapper.style.transform = `translateX(${-currentIndex * 100 + (diff / modal.offsetWidth) * 100}%)`;
   });
 
-  modal.addEventListener('touchend', () => {
+  modal.addEventListener('touchend', (event) => {
     if (!isDragging) return;
-
     isDragging = false;
-    const swipeDistance = currentTranslate - prevTranslate;
+    imageWrapper.style.transition = 'transform 0.3s ease-in-out';
 
-    // Check if swipe distance crosses the threshold
-    if (swipeDistance < -50 && currentIndex < images.length - 1) {
+    const endX = event.changedTouches[0].clientX;
+    const diff = endX - startX;
+
+    // スワイプ判定
+    if (diff < -50 && currentIndex < images.length - 1) {
       currentIndex++;
-    } else if (swipeDistance > 50 && currentIndex > 0) {
+    } else if (diff > 50 && currentIndex > 0) {
       currentIndex--;
     }
-
-    // Snap to the current image
-    updateTranslate();
-    modalImg.style.transition = 'transform 0.3s ease'; // Smooth transition back to position
+    updateWrapperPosition();
   });
-
-  function updateTranslate() {
-    prevTranslate = -currentIndex * modal.offsetWidth;
-    modalImg.style.transform = `translateX(${prevTranslate}px)`;
-  }
-
-  // Initialize the correct image position
-  updateTranslate();
 }
 
+updateWrapperPosition(); // 初期化で正しい位置に移動
+
+// let startX = 0;
+// let currentTranslate = 0;
+// let prevTranslate = 0;
+// let isDragging = false;
+
+// // Add Event Listeners for Swipe
+// function addSwipeListeners(modal) {
+//   const modalImg = document.getElementById('popup-image');
+//   const images = document.querySelectorAll('.image-wrapper');
+//   let currentIndex = 0;
+
+//   modal.addEventListener('touchstart', (event) => {
+//     startX = event.touches[0].clientX;
+//     isDragging = true;
+//     modalImg.style.transition = 'none'; // Disable animation during swipe
+//   });
+
+//   modal.addEventListener('touchmove', (event) => {
+//     if (!isDragging) return;
+
+//     const currentX = event.touches[0].clientX;
+//     currentTranslate = prevTranslate + (currentX - startX);
+
+//     // Move the image container
+//     modalImg.style.transform = `translateX(${currentTranslate}px)`;
+//   });
+
+//   modal.addEventListener('touchend', () => {
+//     if (!isDragging) return;
+
+//     isDragging = false;
+//     const swipeDistance = currentTranslate - prevTranslate;
+
+//     // Check if swipe distance crosses the threshold
+//     if (swipeDistance < -50 && currentIndex < images.length - 1) {
+//       currentIndex++;
+//     } else if (swipeDistance > 50 && currentIndex > 0) {
+//       currentIndex--;
+//     }
+
+//     // Snap to the current image
+//     updateTranslate();
+//     modalImg.style.transition = 'transform 0.3s ease'; // Smooth transition back to position
+//   });
+
+//   function updateTranslate() {
+//     prevTranslate = -currentIndex * modal.offsetWidth;
+//     modalImg.style.transform = `translateX(${prevTranslate}px)`;
+//   }
+
+//   // Initialize the correct image position
+//   updateTranslate();
+// }
 
 // Auto-slide with infinite scrolling
 let slideTimer = setInterval(() => slideShelves(), 2500); // Adjust interval as needed

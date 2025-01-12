@@ -21,7 +21,7 @@ section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
+	font-size: 110%;
 	font: inherit;
 	vertical-align: baseline;}
 
@@ -1850,12 +1850,18 @@ input, select, textarea {
 		opacity: 1;
 	}
 
-	.caption {
-		margin-top: 5px;
-		font-size: 14px;
-		color: #b9bbbd;
+	.image-wrapper {
+		display: flex;
+		transition: transform 0.3s ease-in-out;
+		transform: translateX(0); /* 初期状態は0 */
 	}
-
+	
+	.image-wrapper img {
+		flex: 0 0 100%; /* 各画像を幅100%に設定 */
+		max-height: 90vh; /* 縦方向の制約を設定 */
+		object-fit: contain; /* アスペクト比を維持 */
+	}
+	
 	.button-round {
 		width: 5.5rem;
 		height: 5.5rem;
