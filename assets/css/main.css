@@ -1765,6 +1765,28 @@ input, select, textarea {
 		max-height: 95vh;
 	}
 
+	.image-wrapper {
+		display: flex;
+		transition: transform 0.3s ease;
+		will-change: transform;
+	}
+	
+	.image-wrapper img {
+		width: auto; /* Maintain the natural width */
+		max-width: 100%; /* Fit within the modal horizontally */
+		height: auto; /* Maintain aspect ratio */
+		max-height: 90vh; /* Prevent vertical overflow */
+		margin: auto; /* Center images vertically and horizontally */
+	}
+
+	.image-wrapper div {
+		flex: 0 0 100%; /* Ensure each image container takes full width */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 95vh; /* Match modal's max height */
+	}
+
 	.prev, .next {
 		position: absolute;
 		display: flex;

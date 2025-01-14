@@ -609,27 +609,57 @@ document.querySelectorAll('.flipquote').forEach(flipquote => {
 let startX = 0;
 let currentX = 0;
 let isDragging = false;
-let currentTranslate = 0;
-let previousTranslate = 0;
 let currentIndex = 0;
 const galleryImages = Array.from(document.querySelectorAll('.gallery img, .shelf-item img'));
 const modal = document.getElementById('popup-modal');
 const modalImg = document.getElementById('popup-image');
+const imageWrapper = document.createElement('div'); // Wrapper for all images in the modal
+imageWrapper.style.position = 'relative';
+imageWrapper.style.width = '100%';
+imageWrapper.style.height = '100%';
 
 function openModal(imageSrc, index) {
   currentIndex = index; // Update index for current image
-  modalImg.src = imageSrc; // Set modal image source
 
-  modal.style.top = `${window.scrollY + 320}px`;
-  modal.style.left = `50%`;
+  // Populate image wrapper
+  imageWrapper.innerHTML = '';
+  galleryImages.forEach((image, i) => {
+    const imgElement = document.createElement('img');
+    imgElement.src = image.src.replace('-thumbnail', '');
+    imgElement.style.flex = '0 0 100%';
+    imgElement.style.maxHeight = '90vh';
+    imgElement.style.objectFit = 'contain';
+    imgElement.style.transition = 'transform 0.3s ease';
+		imgElement.style.maxWidth = '100%'; // Scale within modal width
+		imgElement.style.margin = 'auto'; // Center image
+
+    if (i === currentIndex) imgElement.classList.add('current');
+    imageWrapper.appendChild(imgElement);
+  });
+
+  imageWrapper.style.display = 'flex';
+  imageWrapper.style.transition = 'transform 0.3s ease';
+  imageWrapper.style.willChange = 'transform';
+
+  const modalContent = modal.querySelector('.modal-content');
+  modalContent.innerHTML = ''; // Clear existing content
+  modalContent.appendChild(imageWrapper);
+
+  updateModalPosition();
+
   modal.style.display = 'flex'; // Show modal
-
+	modal.style.top = `${window.scrollY + 320}px`;
+	modal.style.left = `50%`;
+  modal.style.overflow = 'hidden'; // Prevent modal movement
   addSwipeListeners(); // Add swipe functionality
+	modalContent.onclick = () => closeModal();
 }
 
 function closeModal() {
   modal.style.display = 'none'; // Hide modal
+  modal.style.overflow = 'visible'; // Restore modal overflow
   removeSwipeListeners(); // Remove swipe functionality
+  imageWrapper.innerHTML = ''; // Clear images
 }
 
 function navigateImage(direction) {
@@ -640,31 +670,30 @@ function navigateImage(direction) {
     currentIndex = 0; // Wrap to first image
   }
 
-  updateModalImage();
+  updateModalPosition();
 }
 
-function updateModalImage() {
-  const thumbnailSrc = galleryImages[currentIndex].getAttribute('src');
-  const imageSrc = thumbnailSrc.replace('-thumbnail', '');
-  modalImg.src = imageSrc;
+function updateModalPosition() {
+  const translateX = -currentIndex * 100;
+  imageWrapper.style.transform = `translateX(${translateX}%)`;
 }
 
 function addSwipeListeners() {
-  modal.addEventListener('touchstart', handleTouchStart);
-  modal.addEventListener('touchmove', handleTouchMove);
-  modal.addEventListener('touchend', handleTouchEnd);
+  imageWrapper.addEventListener('touchstart', handleTouchStart);
+  imageWrapper.addEventListener('touchmove', handleTouchMove);
+  imageWrapper.addEventListener('touchend', handleTouchEnd);
 }
 
 function removeSwipeListeners() {
-  modal.removeEventListener('touchstart', handleTouchStart);
-  modal.removeEventListener('touchmove', handleTouchMove);
-  modal.removeEventListener('touchend', handleTouchEnd);
+  imageWrapper.removeEventListener('touchstart', handleTouchStart);
+  imageWrapper.removeEventListener('touchmove', handleTouchMove);
+  imageWrapper.removeEventListener('touchend', handleTouchEnd);
 }
 
 function handleTouchStart(event) {
   startX = event.touches[0].clientX;
   isDragging = true;
-  modalImg.style.transition = 'none'; // Disable transition during drag
+  imageWrapper.style.transition = 'none'; // Disable transition during drag
 }
 
 function handleTouchMove(event) {
@@ -673,14 +702,15 @@ function handleTouchMove(event) {
   currentX = event.touches[0].clientX;
   const diff = currentX - startX;
 
-  modalImg.style.transform = `translateX(${diff}px)`;
+  const translateX = -currentIndex * 100 + (diff / modal.offsetWidth) * 100;
+  imageWrapper.style.transform = `translateX(${translateX}%)`;
 }
 
 function handleTouchEnd() {
   if (!isDragging) return;
 
   isDragging = false;
-  modalImg.style.transition = 'transform 0.3s ease'; // Smooth transition
+  imageWrapper.style.transition = 'transform 0.3s ease'; // Smooth transition
   const diff = currentX - startX;
 
   if (diff < -50 && currentIndex < galleryImages.length - 1) {
@@ -688,7 +718,7 @@ function handleTouchEnd() {
   } else if (diff > 50 && currentIndex > 0) {
     navigateImage(-1); // Swipe right to previous image
   } else {
-    modalImg.style.transform = 'translateX(0)'; // Snap back to position
+    updateModalPosition(); // Snap back to current position
   }
 }
 
