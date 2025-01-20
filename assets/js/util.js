@@ -776,3 +776,64 @@ document.querySelectorAll('.shelf').forEach((shelf) => {
   shelf.addEventListener('touchstart', pauseAutoSlide);
   shelf.addEventListener('touchend', resumeAutoSlide);
 });
+
+const phrases = ["code.", "sketch.", "write haiku.", "create."];
+const animatedText = document.querySelector(".animated-text");
+let phraseIndex = 0;
+let charIndex = 0;
+
+function typeEffect() {
+  if (charIndex < phrases[phraseIndex].length) {
+    animatedText.textContent += phrases[phraseIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeEffect, 150); // Typing speed
+  } else {
+    setTimeout(eraseEffect, 2000); // Pause before erasing
+  }
+}
+
+function eraseEffect() {
+  if (charIndex > 0) {
+    animatedText.textContent = phrases[phraseIndex].substring(0, charIndex - 1);
+    charIndex--;
+    setTimeout(eraseEffect, 100); // Erase speed
+  } else {
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    setTimeout(typeEffect, 500); // Pause before typing next phrase
+  }
+}
+
+document.addEventListener("DOMContentLoaded", typeEffect);
+
+const messages = [
+  "Hi, Sonia!",
+  "I've seen your works and...",
+	"I have an idea..."
+];
+
+const input = document.getElementById("message");
+let messageIndex = 0;
+let charIndex2 = 0;
+
+function typePlaceholder() {
+  if (charIndex2 < messages[messageIndex].length) {
+    input.placeholder += messages[messageIndex].charAt(charIndex2);
+    charIndex2++;
+    setTimeout(typePlaceholder, 150); // Typing speed
+  } else {
+    setTimeout(erasePlaceholder, 2000); // Pause before erasing
+  }
+}
+
+function erasePlaceholder() {
+  if (charIndex2 > 0) {
+    input.placeholder = messages[messageIndex].substring(0, charIndex2 - 1);
+    charIndex2--;
+    setTimeout(erasePlaceholder, 100); // Erase speed
+  } else {
+    messageIndex = (messageIndex + 1) % messages.length;
+    setTimeout(typePlaceholder, 500); // Pause before typing next message
+  }
+}
+
+document.addEventListener("DOMContentLoaded", typePlaceholder);

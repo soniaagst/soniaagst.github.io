@@ -1915,3 +1915,33 @@ input, select, textarea {
 	.no-underline {
 		border-bottom: none;
 	}
+
+	.animated-text {
+		color: #ffffff;
+		display: inline-block;
+		overflow: hidden;
+		vertical-align: bottom;
+		animation: blink-cursor 0.8s steps(2) infinite;
+	}
+
+	@keyframes blink-cursor {
+		0%, 100% {
+			border-right: 2px solid #ffffff;
+		}
+		50% {
+			border-right: 2px solid transparent;
+		}
+	}
+
+	.center-container {
+		text-align: center; /* Center text horizontally */
+	}
+	
+	.center-container p {
+		font-size: 0.6rem;
+		color: #ffffff;
+		margin: 0;
+		letter-spacing: 0.2rem;
+		opacity: 0.75;
+		text-transform: uppercase;
+	}
