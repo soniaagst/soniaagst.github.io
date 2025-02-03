@@ -47,6 +47,30 @@
 								<h2 class="major">Projects</h2>
 								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
 								<p>I mainly write in Python. You can see some of my coursework projects as a math student below. Here we go.<br/><br/></p>
+								<section>
+									<i class="icon solid fa-code"></i>
+									<h3>Pustaka Console System</h3>
+									<p>Proudly present, my first actual team project with C#. This is an application designed for librarians and patrons, to manage library's inventory, see borrowed books, and more. Although it is currently under construction, here's some of the menus.</p>
+									<pre><code class="language-csharp">string menuChoice = Form.AskMultipleChoices(question, menus);
+while(menuChoice is not "Q") {
+	if(menuChoice is "A") {
+		Database.DisplayBooks();
+		menuChoice = Form.AskMultipleChoices(question, menus);
+	}
+	else if(menuChoice is "B") {
+		Database.AddBook();
+		menuChoice = Form.AskMultipleChoices(question, menus);
+	}
+	else if(menuChoice is "C") {
+		Database.SearchBook();
+		menuChoice = Form.AskMultipleChoices(question, menus);
+	}
+}
+Console.WriteLine("Goodbye!");</code></pre>
+									<a href="https://github.com/soniaagst/PustakaConsoleSystem" target="_blank" class="button small">View on <i class="icon brands fa-github"></i></a>
+								</section>
+								<hr />
+
 								<!-- Project 1 -->
 								<section>
 									<i class="icon solid fa-code"></i>
@@ -502,6 +526,7 @@ for i in range(len(synd)):
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/an-old-hope.min.css">
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
 			<script>hljs.highlightAll();</script>
 
 	</body>
